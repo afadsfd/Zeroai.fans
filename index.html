@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZeroAI — Building AI at the Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --c:   #00ffe7;
+  --c2:  #bf00ff;
+  --c3:  #ff6b35;
+  --bg:  #030810;
+  --bg2: #060f1e;
+  --bg3: #091525;
+  --gb:  rgba(0,255,231,0.08);
+  --gb2: rgba(0,255,231,0.14);
+  --gb3: rgba(0,255,231,0.28);
+  --t1:  #daeef6;
+  --t2:  rgba(218,238,246,0.55);
+  --t3:  rgba(218,238,246,0.28);
+  --t4:  rgba(218,238,246,0.12);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: none;
+  line-height: 1;
+}
+
+/* LANG */
+[data-lang="zh"] { display: none; }
+body.zh [data-lang="en"] { display: none; }
+body.zh [data-lang="zh"] { display: block; }
+body.zh span[data-lang="zh"] { display: inline; }
+body.zh span[data-lang="en"] { display: none; }
+span[data-lang="zh"] { display: none; }
+
+/* OVERLAYS */
+#particle-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,255,231,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,231,0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+.scanlines {
+  position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.018) 2px, rgba(0,0,0,0.018) 4px);
+}
+
+/* CURSOR */
+.cur { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); border-radius: 50%; }
+#cur-dot { width: 6px; height: 6px; background: var(--c); box-shadow: 0 0 8px var(--c), 0 0 16px var(--c); transition: width .15s, height .15s; }
+#cur-ring { width: 30px; height: 30px; border: 1px solid rgba(0,255,231,.35); transition: all .12s ease-out; }
+body.hovering #cur-dot { width: 10px; height: 10px; }
+body.hovering #cur-ring { width: 46px; height: 46px; border-color: rgba(0,255,231,.7); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 800;
+  height: 66px; padding: 0 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(3,8,16,.88);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0,255,231,.1);
+}
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900; font-size: 18px; letter-spacing: .2em;
+  color: var(--c); text-decoration: none;
+  text-shadow: 0 0 18px rgba(0,255,231,.6), 0 0 36px rgba(0,255,231,.25);
+  cursor: none;
+}
+.nav-mid { display: flex; gap: 36px; list-style: none; }
+.nav-mid a {
+  font-family: 'Rajdhani'; font-weight: 600; font-size: 12px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--t2); text-decoration: none; cursor: none;
+  transition: color .2s; position: relative; padding-bottom: 3px;
+}
+.nav-mid a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--c);
+  box-shadow: 0 0 5px var(--c);
+  transition: width .28s cubic-bezier(.16,1,.3,1);
+}
+.nav-mid a:hover, .nav-mid a.active { color: var(--c); }
+.nav-mid a:hover::after, .nav-mid a.active::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.lang-btn {
+  font-family: 'Share Tech Mono'; font-size: 11px; letter-spacing: .14em;
+  color: var(--t3); border: 1px solid rgba(0,255,231,.14);
+  background: transparent; padding: 6px 14px; cursor: none;
+  transition: all .2s;
+}
+.lang-btn:hover, .lang-btn.on { color: var(--c); border-color: var(--gb2); background: var(--gb); }
+.nav-cta {
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 11px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--bg); background: var(--c); border: none;
+  padding: 10px 24px; text-decoration: none; cursor: none;
+  clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition: box-shadow .25s;
+}
+.nav-cta:hover { box-shadow: 0 0 24px rgba(0,255,231,.5), 0 0 48px rgba(0,255,231,.2); }
+
+/* LAYOUT */
+main { position: relative; z-index: 10; }
+section { padding: 130px 60px 100px; position: relative; }
+section:not(#hero) { border-top: 1px solid rgba(0,255,231,.07); }
+
+/* REVEAL */
+.rv { opacity: 0; transform: translateY(36px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.rv.in { opacity: 1; transform: translateY(0); }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+.d4{transition-delay:.32s} .d5{transition-delay:.40s} .d6{transition-delay:.48s}
+
+/* EYEBROW */
+.eyebrow {
+  font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: .32em;
+  color: var(--c); text-transform: uppercase; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--c); box-shadow: 0 0 5px var(--c); flex-shrink: 0; }
+
+/* HERO */
+#hero {
+  min-height: 100vh; padding-top: 66px;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Share Tech Mono'; font-size: 10px; letter-spacing: .3em;
+  color: var(--c); margin-bottom: 36px;
+  opacity: 0; animation: fadeUp .8s .2s forwards;
+}
+.hero-badge::before, .hero-badge::after {
+  content: ''; height: 1px; width: 36px;
+  background: linear-gradient(90deg, transparent, var(--c));
+  box-shadow: 0 0 6px var(--c);
+}
+.hero-badge::after { transform: scaleX(-1); }
+.pulse-dot { width: 5px; height: 5px; background: #00ff88; border-radius: 50%; animation: pdot 2s ease-in-out infinite; box-shadow: 0 0 6px #00ff88; }
+@keyframes pdot { 0%,100%{box-shadow:0 0 4px #00ff88} 50%{box-shadow:0 0 16px #00ff88,0 0 30px rgba(0,255,136,.3)} }
+.hero-h1 {
+  font-family: 'Orbitron'; font-weight: 900;
+  font-size: clamp(38px, 5.8vw, 78px); line-height: 1.06;
+  margin-bottom: 28px; max-width: 860px;
+  opacity: 0; animation: fadeUp .9s .42s forwards;
+}
+.hero-h1 .l1 { display: block; color: var(--t1); margin-bottom: 4px; }
+.hero-h1 .l2 {
+  display: block;
+  background: linear-gradient(95deg, var(--c) 0%, #5bf5e8 40%, var(--c2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(0,255,231,.35));
+}
+.hero-sub {
+  max-width: 560px; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp .9s .62s forwards;
+}
+.hero-sub p { font-size: 17px; font-weight: 300; color: var(--t2); line-height: 1.75; }
+.hero-btns {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .9s .8s forwards;
+}
+.btn-p {
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 12px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--bg); background: var(--c); padding: 14px 36px;
+  text-decoration: none; cursor: none;
+  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition: box-shadow .25s; position: relative; overflow: hidden;
+}
+.btn-p::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.15); transform: translateX(-100%); transition: transform .3s; }
+.btn-p:hover::after { transform: translateX(0); }
+.btn-p:hover { box-shadow: 0 0 28px rgba(0,255,231,.55), 0 0 56px rgba(0,255,231,.18); }
+.btn-g {
+  font-family: 'Rajdhani'; font-weight: 700; font-size: 12px;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(0,255,231,.22);
+  background: rgba(0,255,231,.04); padding: 13px 36px;
+  text-decoration: none; cursor: none;
+  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition: all .25s;
+}
+.btn-g:hover { border-color: var(--gb3); color: var(--c); background: rgba(0,255,231,.08); box-shadow: 0 0 20px rgba(0,255,231,.1); }
+.hero-stats {
+  display: flex; gap: 0; margin-top: 80px;
+  border-top: 1px solid rgba(0,255,231,.1);
+  opacity: 0; animation: fadeUp .9s 1s forwards;
+}
+.stat { flex: 1; padding: 32px 40px 0; border-right: 1px solid rgba(0,255,231,.07); }
+.stat:first-child { padding-left: 0; }
+.stat:last-child { border-right: none; }
+.stat-n { font-family: 'Orbitron'; font-weight: 700; font-size: 30px; color: var(--c); text-shadow: 0 0 18px rgba(0,255,231,.45); line-height: 1; }
+.stat-l { font-size: 12px; letter-spacing: .1em; color: var(--t3); margin-top: 8px; text-transform: uppercase; }
+.bracket { position: absolute; width: 50px; height: 50px; pointer-events: none; }
+.bracket.tl { top: 76px; left: 40px; border-top: 1px solid rgba(0,255,231,.4); border-left: 1px solid rgba(0,255,231,.4); }
+.bracket.tr { top: 76px; right: 40px; border-top: 1px solid rgba(0,255,231,.4); border-right: 1px solid rgba(0,255,231,.4); }
+.bracket.bl { bottom: 40px; left: 40px; border-bottom: 1px solid rgba(0,255,231,.4); border-left: 1px solid rgba(0,255,231,.4); }
+.bracket.br { bottom: 40px; right: 40px; border-bottom: 1px solid rgba(0,255,231,.4); border-right: 1px solid rgba(0,255,231,.4); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ABOUT */
+#about { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; max-width: 1160px; }
+.about-h2 { font-family: 'Orbitron'; font-weight: 700; font-size: clamp(26px,3.2vw,42px); line-height: 1.18; margin-bottom: 28px; }
+.about-h2 em { font-style: normal; color: var(--c); text-shadow: 0 0 18px rgba(0,255,231,.35); }
+.body-t { font-size: 15.5px; font-weight: 300; color: var(--t2); line-height: 1.82; margin-bottom: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 32px; }
+.chip {
+  font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: .1em;
+  color: var(--c); border: 1px solid rgba(0,255,231,.18);
+  background: rgba(0,255,231,.04); padding: 6px 14px;
+  transition: all .22s; cursor: default;
+}
+.chip:hover { border-color: rgba(0,255,231,.5); background: rgba(0,255,231,.09); box-shadow: 0 0 10px rgba(0,255,231,.12); }
+.holo {
+  background: rgba(0,255,231,.032); border: 1px solid rgba(0,255,231,.13);
+  padding: 32px; position: relative; overflow: hidden; margin-bottom: 18px;
+}
+.holo::after {
+  content: ''; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,255,231,.05), transparent);
+  animation: holoscan 5s linear infinite;
+}
+@keyframes holoscan { to { left: 130%; } }
+.holo-label { font-family: 'Share Tech Mono'; font-size: 9.5px; letter-spacing: .3em; color: var(--c); margin-bottom: 22px; text-transform: uppercase; opacity: .7; }
+.hrow { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(0,255,231,.055); }
+.hrow:last-child { border-bottom: none; }
+.hk { font-size: 13px; color: var(--t2); letter-spacing: .04em; }
+.hv { font-family: 'Orbitron'; font-size: 12.5px; color: var(--c); text-shadow: 0 0 8px rgba(0,255,231,.35); }
+.badge-live { font-family: 'Share Tech Mono'; font-size: 9px; letter-spacing: .15em; color: #00ff88; border: 1px solid rgba(0,255,136,.3); background: rgba(0,255,136,.07); padding: 2px 8px; text-shadow: 0 0 6px rgba(0,255,136,.5); }
+.holo-q { font-size: 14px; font-weight: 300; color: var(--t2); line-height: 1.82; font-style: italic; }
+
+/* PRODUCTS */
+#products { background: var(--bg2); }
+.sec-head { max-width: 640px; margin-bottom: 64px; }
+.sec-h2 { font-family: 'Orbitron'; font-weight: 700; font-size: clamp(24px,3.2vw,40px); line-height: 1.18; margin-bottom: 14px; }
+.sec-h2 em { font-style: normal; color: var(--c); text-shadow: 0 0 16px rgba(0,255,231,.35); }
+.sec-desc { font-size: 15px; font-weight: 300; color: var(--t2); line-height: 1.75; margin-bottom: 5px; }
+.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.pcard {
+  background: rgba(0,255,231,.03); border: 1px solid rgba(0,255,231,.11);
+  padding: 36px 30px; position: relative; overflow: hidden;
+  transition: transform .32s cubic-bezier(.16,1,.3,1), border-color .32s, box-shadow .32s;
+  cursor: none;
+}
+.pcard.featured { border-color: rgba(0,255,231,.22); background: rgba(0,255,231,.045); }
+.pcard::before {
+  content: ''; position: absolute; bottom: 0; right: 0; width: 48px; height: 48px;
+  border-bottom: 1px solid rgba(0,255,231,.22); border-right: 1px solid rgba(0,255,231,.22);
+  transition: width .3s, height .3s;
+}
+.pcard::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,255,231,.06) 0%, transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+.pcard:hover { transform: translateY(-7px); border-color: rgba(0,255,231,.32); box-shadow: 0 22px 60px rgba(0,0,0,.45), 0 0 40px rgba(0,255,231,.07); }
+.pcard:hover::before { width: 64px; height: 64px; }
+.pcard:hover::after { opacity: 1; }
+.pstatus {
+  font-family: 'Share Tech Mono'; font-size: 9.5px; letter-spacing: .22em;
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; margin-bottom: 26px;
+}
+.ps-live { color: #00ff88; border: 1px solid rgba(0,255,136,.28); background: rgba(0,255,136,.06); }
+.ps-live::before { content: ''; width: 5px; height: 5px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 6px #00ff88; animation: pdot 2s infinite; }
+.ps-soon { color: var(--t3); border: 1px solid rgba(218,238,246,.1); }
+.ps-soon::before { content: ''; width: 5px; height: 5px; border: 1px solid var(--t3); border-radius: 50%; }
+.picon { font-size: 28px; margin-bottom: 18px; display: block; line-height: 1; }
+.pname { font-family: 'Orbitron'; font-weight: 700; font-size: 20px; letter-spacing: .04em; margin-bottom: 12px; }
+.pname em { font-style: normal; color: var(--c); }
+.ptag { font-size: 14px; font-weight: 300; color: var(--t2); line-height: 1.65; margin-bottom: 6px; }
+.ptag-zh { font-size: 13px; color: var(--t3); line-height: 1.65; margin-bottom: 24px; }
+.pfeat { list-style: none; margin-bottom: 30px; }
+.pfeat li {
+  font-size: 13px; color: var(--t2); padding: 7px 0;
+  border-bottom: 1px solid rgba(0,255,231,.05);
+  display: flex; align-items: center; gap: 10px; line-height: 1.5;
+}
+.pfeat li::before { content: ''; width: 3px; height: 3px; background: var(--c); border-radius: 50%; box-shadow: 0 0 5px var(--c); flex-shrink: 0; }
+.plink {
+  font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--c); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .2s; cursor: none;
+}
+.plink:hover { gap: 14px; }
+.plink-off { font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--t4); display: inline-flex; align-items: center; gap: 8px; cursor: none; }
+.more-bar {
+  margin-top: 40px; padding: 22px 30px;
+  border: 1px dashed rgba(0,255,231,.14);
+  font-family: 'Share Tech Mono'; font-size: 11.5px; letter-spacing: .18em;
+  color: var(--t3); text-align: center; line-height: 1.8;
+}
+.more-bar em { font-style: normal; color: var(--c); }
+
+/* SERVICES */
+#services { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%); }
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 980px; }
+.scard {
+  background: rgba(0,255,231,.03); border: 1px solid rgba(0,255,231,.1);
+  padding: 36px 32px; position: relative; overflow: hidden;
+  transition: border-color .28s, background .28s; cursor: none;
+}
+.scard:hover { border-color: rgba(0,255,231,.26); background: rgba(0,255,231,.05); }
+.scard::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+  background: linear-gradient(180deg, var(--c), transparent);
+  transition: height .4s cubic-bezier(.16,1,.3,1);
+}
+.scard:hover::after { height: 100%; }
+.snum { font-family: 'Orbitron'; font-size: 10px; letter-spacing: .24em; color: var(--c); opacity: .35; margin-bottom: 22px; }
+.stitle { font-family: 'Orbitron'; font-weight: 700; font-size: 15.5px; letter-spacing: .04em; margin-bottom: 5px; }
+.stitle-zh { font-size: 14px; color: var(--t2); margin-bottom: 18px; }
+.sdesc { font-size: 14px; font-weight: 300; color: var(--t2); line-height: 1.75; margin-bottom: 7px; }
+.sdesc-zh { font-size: 13px; color: var(--t3); line-height: 1.78; margin-bottom: 22px; }
+.stag {
+  font-family: 'Share Tech Mono'; font-size: 9.5px; letter-spacing: .12em;
+  color: var(--c2); border: 1px solid rgba(191,0,255,.22);
+  background: rgba(191,0,255,.05); padding: 4px 12px; display: inline-block;
+}
+
+/* CONTACT */
+#contact { background: var(--bg3); text-align: center; min-height: auto; padding: 110px 60px 60px; }
+.contact-h2 { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(26px,4vw,52px); margin-bottom: 14px; }
+.contact-h2 em { font-style: normal; background: linear-gradient(90deg, var(--c), var(--c2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.contact-sub { font-size: 16px; color: var(--t2); margin-bottom: 5px; }
+.contact-sub-zh { font-size: 14px; color: var(--t3); margin-bottom: 52px; }
+.clinks { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
+.clink {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 30px 44px; background: rgba(0,255,231,.032);
+  border: 1px solid rgba(0,255,231,.12); text-decoration: none;
+  transition: all .3s; min-width: 210px; cursor: none;
+}
+.clink:hover { border-color: rgba(0,255,231,.3); background: rgba(0,255,231,.06); transform: translateY(-5px); box-shadow: 0 18px 48px rgba(0,0,0,.35), 0 0 22px rgba(0,255,231,.07); }
+.clink-icon { font-size: 20px; color: var(--c); line-height: 1; }
+.clink-type { font-family: 'Share Tech Mono'; font-size: 9.5px; letter-spacing: .26em; color: var(--t3); text-transform: uppercase; }
+.clink-val { font-size: 14px; font-weight: 500; color: var(--t1); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid rgba(0,255,231,.07); padding: 26px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: .1em; color: var(--t3);
+}
+.logo-f { color: var(--c); letter-spacing: .2em; }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 0 24px; }
+  .nav-mid { display: none; }
+  section { padding: 100px 24px 80px; }
+  .about-wrap, .svc-grid { grid-template-columns: 1fr; gap: 40px; }
+  .prod-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(0,255,231,.07); padding: 20px 0; }
+  footer { flex-direction: column; gap: 10px; text-align: center; }
+  .clinks { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="cur" id="cur-dot"></div>
+<div class="cur" id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">ZERO<span style="opacity:.22">/</span>AI</a>
+  <ul class="nav-mid">
+    <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">关于</span></a></li>
+    <li><a href="#products"><span data-lang="en">Products</span><span data-lang="zh">产品</span></a></li>
+    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="zh">服务</span></a></li>
+    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="zh">联系</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn on" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+    <a href="#contact" class="nav-cta"><span data-lang="en">Get In Touch</span><span data-lang="zh">联系我</span></a>
+  </div>
+</nav>
+
+<main>
+<!-- HERO -->
+<section id="hero">
+  <div class="bracket tl"></div><div class="bracket tr"></div>
+  <div class="bracket bl"></div><div class="bracket br"></div>
+  <div class="hero-badge"><div class="pulse-dot"></div>ZeroAI &nbsp;·&nbsp; Crypto × AI Builder</div>
+  <h1 class="hero-h1">
+    <span class="l1" data-lang="en">Building AI at the</span>
+    <span class="l1" data-lang="zh" style="font-size:clamp(28px,4.2vw,58px)">在加密与智能的</span>
+    <span class="l2" data-lang="en">Edge of Intelligence</span>
+    <span class="l2" data-lang="zh" style="font-size:clamp(28px,4.2vw,58px)">边界构建 AI</span>
+  </h1>
+  <div class="hero-sub">
+    <p data-lang="en">From <strong style="color:var(--t1);font-weight:600">deep crypto operations</strong> to AI product engineering — every product starts with a real business problem.</p>
+    <p data-lang="zh">从深厚的<strong style="color:var(--t1);font-weight:600">加密行业运营经验</strong>出发，每一个 AI 产品都源于真实的业务痛点。</p>
+  </div>
+  <div class="hero-btns">
+    <a href="#products" class="btn-p"><span data-lang="en">Explore Products</span><span data-lang="zh">探索产品</span></a>
+    <a href="#contact" class="btn-g"><span data-lang="en">Work With Me</span><span data-lang="zh">合作咨询</span></a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l"><span data-lang="en">AI Products</span><span data-lang="zh">AI 产品</span></div></div>
+    <div class="stat"><div class="stat-n">1</div><div class="stat-l"><span data-lang="en">Live & Deployed</span><span data-lang="zh">已上线产品</span></div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l"><span data-lang="en">Platforms Supported</span><span data-lang="zh">兼容会议平台</span></div></div>
+    <div class="stat"><div class="stat-n">Web3</div><div class="stat-l"><span data-lang="en">Native Expertise</span><span data-lang="zh">原生专业背景</span></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div>
+      <div class="eyebrow rv"><span data-lang="en">// Identity</span><span data-lang="zh">// 关于我</span></div>
+      <h2 class="about-h2 rv d1">
+        <span data-lang="en">From Crypto Ops<br>to <em>AI Builder</em></span>
+        <span data-lang="zh">从加密运营<br>到 <em>AI 产品构建者</em></span>
+      </h2>
+      <p class="body-t rv d2" data-lang="en">Years operating at the frontier of the crypto industry gave me something most AI builders don't have — a visceral understanding of real business pain. I know what breaks, what scales, and what users actually need.</p>
+      <p class="body-t rv d2" data-lang="zh">多年在加密行业前线的运营经验，让我拥有大多数 AI 产品人所没有的东西——对真实业务痛点的深刻理解。我清楚什么会出问题，什么能规模化，用户真正需要什么。</p>
+      <p class="body-t rv d3" data-lang="en">Now I build AI products — not to chase trends, but to solve problems I've personally lived through. ZeroAI is the vessel for that journey.</p>
+      <p class="body-t rv d3" data-lang="zh">现在我构建 AI 产品，不是为了追风口，而是为了解决我亲身经历过的问题。ZeroAI 是这段旅程的载体。</p>
+      <div class="chips rv d4">
+        <span class="chip">Crypto Operations</span>
+        <span class="chip">AI Product Dev</span>
+        <span class="chip">Web3 Native</span>
+        <span class="chip">Multi-platform</span>
+        <span class="chip">Business Automation</span>
+        <span class="chip">DeFi</span>
+      </div>
+    </div>
+    <div class="rv d2">
+      <div class="holo">
+        <div class="holo-label">// System.Profile</div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Identity</span><span data-lang="zh">身份</span></span><span class="hv">ZeroAI</span></div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Domain</span><span data-lang="zh">主要领域</span></span><span class="hv">Crypto × AI</span></div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Products Built</span><span data-lang="zh">已构建产品</span></span><span class="hv">3</span></div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Live Products</span><span data-lang="zh">已上线</span></span><span class="hv">1 &nbsp;<span class="badge-live">ONLINE</span></span></div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Philosophy</span><span data-lang="zh">理念</span></span><span class="hv" style="font-size:11px"><span data-lang="en">Real Use Cases</span><span data-lang="zh">真实场景优先</span></span></div>
+        <div class="hrow"><span class="hk"><span data-lang="en">Status</span><span data-lang="zh">状态</span></span><span class="hv"><span data-lang="en">Builder Mode</span><span data-lang="zh">构建中</span></span></div>
+      </div>
+      <div class="holo">
+        <div class="holo-label">// Core.Philosophy</div>
+        <p class="holo-q" data-lang="en">"Every product I build solves a problem I've seen with my own eyes. No vaporware. No demos. Just tools that work."</p>
+        <p class="holo-q" data-lang="zh">「每一个产品，都源于我亲眼见过的真实问题。不做 PPT 产品，不做 Demo 展示，只做真正能用的工具。」</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="sec-head">
+    <div class="eyebrow rv"><span data-lang="en">// Products.List</span><span data-lang="zh">// 产品列表</span></div>
+    <h2 class="sec-h2 rv d1"><span data-lang="en">Products by <em>ZeroAI</em></span><span data-lang="zh"><em>ZeroAI</em> 旗下产品</span></h2>
+    <p class="sec-desc rv d2" data-lang="en">Each product starts with a real pain point — built to be used, not just demonstrated.</p>
+    <p class="sec-desc rv d2" data-lang="zh" style="font-size:14px;color:var(--t3)">每个产品都从真实痛点出发，做真正可用的工具，而非 Demo。</p>
+  </div>
+  <div class="prod-grid">
+    <!-- MeetSimul -->
+    <div class="pcard featured rv">
+      <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
+      <span class="picon">🎙</span>
+      <div class="pname">Meet<em>Simul</em></div>
+      <p class="ptag" data-lang="en">AI-powered simultaneous interpretation for every meeting platform.</p>
+      <p class="ptag-zh" data-lang="zh">兼容所有主流会议系统的 AI 同声传译。</p>
+      <ul class="pfeat">
+        <li><span data-lang="en">Works with Zoom, Teams, Meet & more</span><span data-lang="zh">兼容 Zoom、Teams、腾讯会议等全平台</span></li>
+        <li><span data-lang="en">Real-time, low-latency translation</span><span data-lang="zh">实时翻译，极低延迟</span></li>
+        <li><span data-lang="en">Multi-language support</span><span data-lang="zh">多语言支持</span></li>
+        <li><span data-lang="en">Zero platform migration needed</span><span data-lang="zh">无需迁移现有会议系统</span></li>
+      </ul>
+      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> &nbsp;→</a>
+    </div>
+    <!-- PredMarket -->
+    <div class="pcard rv d1">
+      <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
+      <span class="picon">📊</span>
+      <div class="pname">Pred<em>Market</em></div>
+      <p class="ptag" data-lang="en">The aggregator for prediction markets — all platforms, one view.</p>
+      <p class="ptag-zh" data-lang="zh">预测市场聚合器，一站式参与多平台预测机会。</p>
+      <ul class="pfeat">
+        <li><span data-lang="en">Multi-platform data aggregation</span><span data-lang="zh">多平台数据聚合</span></li>
+        <li><span data-lang="en">Real-time market discovery</span><span data-lang="zh">实时市场发现</span></li>
+        <li><span data-lang="en">Built for crypto-native traders</span><span data-lang="zh">专为加密原生用户设计</span></li>
+        <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
+      </ul>
+      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> &nbsp;→</span>
+    </div>
+    <!-- CryptoVault -->
+    <div class="pcard rv d2">
+      <span class="pstatus ps-soon"><span data-lang="en">IN DEVELOPMENT</span><span data-lang="zh">开发中</span></span>
+      <span class="picon">💼</span>
+      <div class="pname">Crypto<em>Vault</em></div>
+      <p class="ptag" data-lang="en">See all your crypto assets across every platform, in one place.</p>
+      <p class="ptag-zh" data-lang="zh">跨平台加密资产聚合，链上链下资产一览无余。</p>
+      <ul class="pfeat">
+        <li><span data-lang="en">Multi-exchange API integration</span><span data-lang="zh">多交易所 API 接入</span></li>
+        <li><span data-lang="en">On-chain asset sync</span><span data-lang="zh">链上资产实时同步</span></li>
+        <li><span data-lang="en">Unified portfolio dashboard</span><span data-lang="zh">统一资产仪表盘</span></li>
+        <li><span data-lang="en">Real-time balance tracking</span><span data-lang="zh">实时余额追踪</span></li>
+      </ul>
+      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> &nbsp;→</span>
+    </div>
+  </div>
+  <div class="more-bar rv">🚀 &nbsp;<span data-lang="en">More ideas in the pipeline — <em>ZeroAI is just getting started</em></span><span data-lang="zh">更多创意正在孵化 — <em>ZeroAI 才刚开始</em></span></div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-head">
+    <div class="eyebrow rv"><span data-lang="en">// Services.Available</span><span data-lang="zh">// 可提供服务</span></div>
+    <h2 class="sec-h2 rv d1"><span data-lang="en">What <em>ZeroAI</em> Can Do For You</span><span data-lang="zh"><em>ZeroAI</em> 能为你做什么</span></h2>
+    <p class="sec-desc rv d2" data-lang="en">Combining deep crypto expertise with AI development capability to solve real problems.</p>
+    <p class="sec-desc rv d2" data-lang="zh" style="font-size:14px;color:var(--t3)">结合深厚的加密行业经验与 AI 开发能力，为你的业务创造真实价值。</p>
+  </div>
+  <div class="svc-grid">
+    <div class="scard rv">
+      <div class="snum">01</div>
+      <div class="stitle" data-lang="en">AI Product Consulting</div>
+      <div class="stitle-zh" data-lang="zh">AI 产品咨询与规划</div>
+      <p class="sdesc" data-lang="en">Turn business pain points into AI product blueprints. From ideation to architecture to go-to-market strategy.</p>
+      <p class="sdesc-zh" data-lang="zh">帮助你将业务痛点转化为可落地的 AI 产品方案，从 0 到 1 全程规划。</p>
+      <span class="stag"><span data-lang="en">For: Founders & Teams</span><span data-lang="zh">适合：创业团队</span></span>
+    </div>
+    <div class="scard rv d1">
+      <div class="snum">02</div>
+      <div class="stitle" data-lang="en">Meeting AI Solutions</div>
+      <div class="stitle-zh" data-lang="zh">会议 AI 解决方案</div>
+      <p class="sdesc" data-lang="en">Enterprise multilingual meeting systems built on MeetSimul — custom translation, transcription and automation.</p>
+      <p class="sdesc-zh" data-lang="zh">基于 MeetSimul 为企业定制多语言会议系统、同声传译与会议记录自动化。</p>
+      <span class="stag"><span data-lang="en">For: Global Teams & DAOs</span><span data-lang="zh">适合：跨国团队 & DAO</span></span>
+    </div>
+    <div class="scard rv d2">
+      <div class="snum">03</div>
+      <div class="stitle" data-lang="en">Crypto × AI Development</div>
+      <div class="stitle-zh" data-lang="zh">加密 × AI 产品开发</div>
+      <p class="sdesc" data-lang="en">AI tooling built for the crypto industry: asset management, data analytics, and operational automation.</p>
+      <p class="sdesc-zh" data-lang="zh">专为加密行业构建 AI 工具：资产管理、数据分析与运营自动化。</p>
+      <span class="stag"><span data-lang="en">For: Exchanges & Projects</span><span data-lang="zh">适合：交易所 & 项目方</span></span>
+    </div>
+    <div class="scard rv d3">
+      <div class="snum">04</div>
+      <div class="stitle" data-lang="en">Partnership & Collaboration</div>
+      <div class="stitle-zh" data-lang="zh">早期项目合作</div>
+      <p class="sdesc" data-lang="en">Open to early-stage collaborations. If you need a builder with Crypto + AI background, let's talk.</p>
+      <p class="sdesc-zh" data-lang="zh">开放早期项目合作，欢迎需要 Crypto + AI 复合背景的创始人探讨。</p>
+      <span class="stag"><span data-lang="en">For: Early-stage Founders</span><span data-lang="zh">适合：早期创业者</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="eyebrow rv" style="justify-content:center"><span data-lang="en">// Contact.Init</span><span data-lang="zh">// 建立连接</span></div>
+  <h2 class="contact-h2 rv d1"><span data-lang="en">Let's <em>Connect</em></span><span data-lang="zh">与我 <em>建立连接</em></span></h2>
+  <p class="contact-sub rv d2" data-lang="en">Have a product idea? Want to collaborate? Let's talk.</p>
+  <p class="contact-sub-zh rv d2" data-lang="zh">有产品想法？想聊聊合作？随时联系。</p>
+  <div class="clinks rv d3">
+    <a href="mailto:lz3862680@gmail.com" class="clink">
+      <span class="clink-icon">✉</span>
+      <span class="clink-type">Email</span>
+      <span class="clink-val">lz3862680@gmail.com</span>
+    </a>
+    <a href="https://t.me/sky87531" target="_blank" class="clink">
+      <span class="clink-icon">✈</span>
+      <span class="clink-type">Telegram</span>
+      <span class="clink-val">@sky87531</span>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="logo-f">ZERO<span style="opacity:.22">/</span>AI</span>
+  <span data-lang="en">© 2025 ZeroAI · All rights reserved</span>
+  <span data-lang="zh">© 2025 ZeroAI · 保留所有权利</span>
+  <span style="color:var(--t4)">Crypto × Intelligence</span>
+</footer>
+
+<script>
+/* LANG */
+function setLang(l) {
+  document.body.classList.toggle('zh', l==='zh');
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.getElementById('btn-zh').classList.toggle('on', l==='zh');
+}
+
+/* CURSOR */
+const dot=document.getElementById('cur-dot'), ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+  rx+=(mx-rx)*.14; ry+=(my-ry)*.14;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+
+/* PARTICLES */
+const cv=document.getElementById('particle-canvas'), c=cv.getContext('2d');
+let W,H;
+function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+resize(); window.addEventListener('resize',resize);
+class Pt {
+  constructor(){this.reset(true);}
+  reset(init){
+    this.x=Math.random()*W; this.y=init?Math.random()*H:Math.random()*H;
+    this.vx=(Math.random()-.5)*.28; this.vy=(Math.random()-.5)*.28;
+    this.r=Math.random()*1.3+.25; this.a=Math.random()*.5+.1;
+    this.col=Math.random()>.88?'#bf00ff':'#00ffe7';
+  }
+  step(){this.x+=this.vx;this.y+=this.vy;if(this.x<-5||this.x>W+5||this.y<-5||this.y>H+5)this.reset();}
+  draw(){c.beginPath();c.arc(this.x,this.y,this.r,0,Math.PI*2);c.fillStyle=this.col;c.globalAlpha=this.a;c.fill();c.globalAlpha=1;}
+}
+class Sk {
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*W*.8+W*.1; this.y=Math.random()*H*.5;
+    this.len=Math.random()*100+50; this.spd=Math.random()*3.5+2;
+    this.a=Math.random()*.35+.08; this.ang=Math.PI*.25+(Math.random()-.5)*.35;
+    this.life=0; this.maxL=this.len/this.spd+8;
+  }
+  step(){this.x+=Math.cos(this.ang)*this.spd;this.y+=Math.sin(this.ang)*this.spd;this.life++;if(this.life>this.maxL+15)this.reset();}
+  draw(){
+    const pr=this.life/this.maxL, al=this.a*Math.sin(Math.min(pr,1)*Math.PI);
+    const tx=this.x-Math.cos(this.ang)*this.len*Math.min(pr,1);
+    const ty=this.y-Math.sin(this.ang)*this.len*Math.min(pr,1);
+    const g=c.createLinearGradient(tx,ty,this.x,this.y);
+    g.addColorStop(0,'transparent'); g.addColorStop(1,`rgba(0,255,231,${al})`);
+    c.beginPath();c.moveTo(tx,ty);c.lineTo(this.x,this.y);c.strokeStyle=g;c.lineWidth=.9;c.stroke();
+  }
+}
+const pts=[...Array(180)].map(()=>new Pt());
+const stk=[...Array(10)].map(()=>new Sk());
+let fr=0;
+(function anim(){
+  c.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.step();p.draw();});
+  if(fr%2===0){
+    const MD=95;
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<MD){c.beginPath();c.moveTo(pts[i].x,pts[i].y);c.lineTo(pts[j].x,pts[j].y);c.strokeStyle=`rgba(0,255,231,${.045*(1-d/MD)})`;c.lineWidth=.4;c.stroke();}
+    }
+  }
+  stk.forEach(s=>{s.step();s.draw();});
+  fr++; requestAnimationFrame(anim);
+})();
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* ACTIVE NAV */
+const secs=document.querySelectorAll('section');
+const nls=document.querySelectorAll('.nav-mid a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});
+  nls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>
