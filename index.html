@@ -9,70 +9,36 @@
 <meta name="author" content="ZeroAI">
 <meta name="robots" content="index, follow">
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.zeroai.fans/">
 <meta property="og:title" content="ZeroAI — Building AI at the Edge">
-<meta property="og:description" content="ZeroAI builds AI products at the intersection of crypto and intelligence. From deep crypto operations to AI product engineering.">
+<meta property="og:description" content="ZeroAI builds AI products at the intersection of crypto and intelligence.">
 <meta property="og:image" content="https://www.zeroai.fans/og-image.svg">
-
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://www.zeroai.fans/">
 <meta property="twitter:title" content="ZeroAI — Building AI at the Edge">
 <meta property="twitter:description" content="ZeroAI builds AI products at the intersection of crypto and intelligence.">
 <meta property="twitter:image" content="https://www.zeroai.fans/og-image.svg">
-
-<!-- Canonical URL -->
 <link rel="canonical" href="https://www.zeroai.fans/">
-
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet">
 
-<!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "ZeroAI",
   "url": "https://www.zeroai.fans/",
-  "logo": "https://www.zeroai.fans/logo.png",
   "description": "ZeroAI builds AI products at the intersection of crypto and intelligence.",
-  "founder": {
-    "@type": "Person",
-    "name": "ZeroAI"
-  },
-  "sameAs": [
-    "https://t.me/sky87531"
-  ],
+  "sameAs": ["https://t.me/sky87531"],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "AI Products",
     "itemListElement": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "MeetSimul",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "PredMarket",
-        "applicationCategory": "FinanceApplication"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "CryptoBox",
-        "applicationCategory": "FinanceApplication"
-      }
+      {"@type":"SoftwareApplication","name":"MeetSimul","applicationCategory":"BusinessApplication"},
+      {"@type":"SoftwareApplication","name":"PredMarket","applicationCategory":"FinanceApplication"},
+      {"@type":"SoftwareApplication","name":"CryptoBox","applicationCategory":"FinanceApplication"}
     ]
   }
 }
@@ -80,414 +46,375 @@
 
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
-  --c:   #00d9c0;
-  --c2:  #a855f7;
-  --c3:  #f97316;
-  --bg:  #0a0a0f;
-  --bg2: #12121a;
-  --bg3: #1a1a25;
-  --surface: rgba(255,255,255,0.03);
-  --surface-hover: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.08);
-  --border-hover: rgba(0,217,192,0.25);
-  --t1:  #fafafa;
-  --t2:  rgba(250,250,250,0.65);
-  --t3:  rgba(250,250,250,0.4);
-  --t4:  rgba(250,250,250,0.15);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --a: #00c896;
+  --a-dim: rgba(0,200,150,0.12);
+  --a-border: rgba(0,200,150,0.2);
+  --bg: #080808;
+  --bg1: #0e0e0e;
+  --bg2: #141414;
+  --s: rgba(255,255,255,0.03);
+  --s2: rgba(255,255,255,0.055);
+  --bd: rgba(255,255,255,0.07);
+  --bd2: rgba(255,255,255,0.12);
+  --t1: #f0f0f0;
+  --t2: rgba(240,240,240,0.52);
+  --t3: rgba(240,240,240,0.28);
+  --t4: rgba(240,240,240,0.1);
+  --ease: cubic-bezier(0.16,1,0.3,1);
 }
-html { scroll-behavior: smooth; font-size: 16px; }
+
+html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--t1);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
-  cursor: none;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 /* LANG */
-[data-lang="zh"], span[data-lang="zh"] { display: none !important; }
-body.zh [data-lang="en"], body.zh span[data-lang="en"] { display: none !important; }
+[data-lang="zh"] { display: none !important; }
+body.zh [data-lang="en"] { display: none !important; }
 body.zh [data-lang="zh"] { display: block !important; }
 body.zh span[data-lang="zh"] { display: inline !important; }
+body.zh span[data-lang="en"] { display: none !important; }
 
-/* OVERLAYS */
-#particle-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-.grid-bg {
+/* NOISE OVERLAY */
+body::before {
+  content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(0,217,192,0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(168,85,247,0.03) 0%, transparent 50%);
-}
-.grid-bg::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
 }
 
-/* CURSOR */
-.cur { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); border-radius: 50%; }
-#cur-dot { width: 5px; height: 5px; background: var(--c); transition: width .2s var(--ease-out-expo), height .2s var(--ease-out-expo), background .2s; }
-#cur-ring { width: 28px; height: 28px; border: 1px solid rgba(0,217,192,0.3); transition: all .15s var(--ease-out-expo); }
-body.hovering #cur-dot { width: 8px; height: 8px; background: var(--t1); }
-body.hovering #cur-ring { width: 40px; height: 40px; border-color: rgba(250,250,250,0.5); }
+/* SCROLL REVEAL */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; }
+.d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
+.d5 { transition-delay: .40s; } .d6 { transition-delay: .48s; }
 
 /* NAV */
 nav {
-  position: fixed; top: 0; width: 100%; z-index: 800;
-  height: 64px; padding: 0 48px;
+  position: fixed; top: 0; width: 100%; z-index: 900;
+  height: 60px; padding: 0 40px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(10,10,15,0.75);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(8,8,8,0.82);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid var(--bd);
 }
 .nav-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700; font-size: 17px; letter-spacing: -0.02em;
+  font-size: 15px; font-weight: 600; letter-spacing: -0.03em;
   color: var(--t1); text-decoration: none;
-  cursor: none;
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 2px;
 }
-.nav-logo span { color: var(--c); font-weight: 600; }
-.nav-mid { display: flex; gap: 32px; list-style: none; }
-.nav-mid a {
-  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px;
-  letter-spacing: -0.01em;
-  color: var(--t2); text-decoration: none; cursor: none;
-  transition: color .25s var(--ease-out-expo); position: relative; padding: 6px 0;
+.nav-logo em { font-style: normal; color: var(--a); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: var(--t3);
+  text-decoration: none;
+  transition: color .2s;
 }
-.nav-mid a::after {
-  content: ''; position: absolute; bottom: 0; left: 50%;
-  width: 0; height: 1.5px; background: var(--c);
-  transition: width .3s var(--ease-out-expo), left .3s var(--ease-out-expo);
-  border-radius: 1px;
-}
-.nav-mid a:hover, .nav-mid a.active { color: var(--t1); }
-.nav-mid a:hover::after, .nav-mid a.active::after { width: 100%; left: 0; }
-.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-links a:hover { color: var(--t1); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
 .lang-btn {
-  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-  color: var(--t3); border: none;
-  background: transparent; padding: 6px 10px; cursor: none;
-  transition: all .2s var(--ease-out-expo); border-radius: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--t3); background: transparent; border: none;
+  padding: 5px 9px; cursor: pointer; border-radius: 5px;
+  transition: all .2s; text-transform: uppercase;
 }
-.lang-btn:hover { color: var(--t1); background: var(--surface-hover); }
-.lang-btn.on { color: var(--c); background: rgba(0,217,192,0.1); }
+.lang-btn:hover { color: var(--t1); background: var(--s2); }
+.lang-btn.on { color: var(--a); background: var(--a-dim); }
 .nav-cta {
-  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px;
-  letter-spacing: -0.01em;
-  color: var(--bg); background: var(--t1); border: none;
-  padding: 9px 18px; text-decoration: none; cursor: none;
-  border-radius: 20px;
-  transition: all .25s var(--ease-out-expo);
+  font-size: 12px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--bg); background: var(--t1);
+  padding: 8px 16px; text-decoration: none; border-radius: 6px;
+  transition: all .2s var(--ease);
 }
-.nav-cta:hover { background: var(--c); transform: translateY(-1px); }
+.nav-cta:hover { background: var(--a); }
 
-/* LAYOUT */
-main { position: relative; z-index: 10; }
-section { padding: 120px max(48px, 5vw) 100px; position: relative; }
-section:not(#hero) { border-top: 1px solid var(--border); }
+/* SECTIONS */
+main { position: relative; z-index: 1; }
+section { padding: 120px clamp(24px, 6vw, 80px); }
+section + section { border-top: 1px solid var(--bd); }
 
-/* REVEAL */
-.rv { opacity: 0; transform: translateY(30px); transition: opacity .8s var(--ease-out-expo), transform .8s var(--ease-out-expo); }
-.rv.in { opacity: 1; transform: translateY(0); }
-.d1{transition-delay:.1s} .d2{transition-delay:.18s} .d3{transition-delay:.26s}
-.d4{transition-delay:.34s} .d5{transition-delay:.42s} .d6{transition-delay:.5s}
-
-/* EYEBROW */
-.eyebrow {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em;
-  color: var(--c); text-transform: uppercase; margin-bottom: 20px;
-  display: flex; align-items: center; gap: 10px; font-weight: 500;
-}
-.eyebrow::before { content: ''; width: 24px; height: 1.5px; background: var(--c); flex-shrink: 0; border-radius: 1px; }
-
-/* HERO */
+/* ── HERO ── */
 #hero {
-  min-height: 100vh; padding-top: 64px;
+  min-height: 100vh; padding-top: 60px;
   display: flex; flex-direction: column; justify-content: center;
-  overflow: hidden; padding-left: 48px; padding-right: 48px;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,150,0.06) 0%, transparent 70%);
 }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.02em;
-  color: var(--c); margin-bottom: 32px;
-  opacity: 0; animation: fadeUp .7s .15s forwards;
-  padding: 8px 16px;
-  background: rgba(0,217,192,0.08);
-  border: 1px solid rgba(0,217,192,0.15);
-  border-radius: 20px;
-  width: fit-content;
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--a); margin-bottom: 36px;
+  opacity: 0; animation: fadeUp .6s .1s forwards;
 }
-.pulse-dot { width: 6px; height: 6px; background: var(--c); border-radius: 50%; animation: pdot 2s ease-in-out infinite; }
-@keyframes pdot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.hero-label::before {
+  content: '';
+  width: 20px; height: 1px; background: var(--a); flex-shrink: 0;
+}
+.hero-dot {
+  width: 5px; height: 5px; background: var(--a); border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .hero-h1 {
-  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-  font-size: clamp(40px, 5.5vw, 72px); line-height: 1.05;
-  margin-bottom: 24px; max-width: 800px;
-  opacity: 0; animation: fadeUp .8s .3s forwards;
-  letter-spacing: -0.03em;
+  font-size: clamp(44px, 6.5vw, 88px);
+  font-weight: 700; line-height: 1.02; letter-spacing: -0.04em;
+  max-width: 820px; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp .7s .22s forwards;
 }
-.hero-h1 .l1 { display: block; color: var(--t1); margin-bottom: 2px; }
-.hero-h1 .l2 {
-  display: block;
-  background: linear-gradient(135deg, var(--c) 0%, #5eead4 50%, var(--c2) 100%);
+.hero-h1 .grad {
+  background: linear-gradient(135deg, var(--t1) 30%, rgba(240,240,240,0.4) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero-h1 .zh-line { font-size: clamp(28px, 4.2vw, 58px); }
+.hero-h1 .accent { color: var(--a); -webkit-text-fill-color: var(--a); }
 .hero-sub {
-  max-width: 520px; margin-bottom: 40px;
-  opacity: 0; animation: fadeUp .8s .45s forwards;
+  max-width: 480px; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp .7s .34s forwards;
 }
-.hero-sub p { font-size: 17px; font-weight: 400; color: var(--t2); line-height: 1.7; }
+.hero-sub p { font-size: 16px; font-weight: 400; color: var(--t2); line-height: 1.75; }
+.hero-sub strong { color: var(--t1); font-weight: 500; }
 .hero-btns {
-  display: flex; gap: 16px; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp .8s .6s forwards;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .7s .46s forwards;
 }
-.btn-p {
-  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
-  letter-spacing: -0.01em;
-  color: var(--bg); background: var(--t1); padding: 14px 28px;
-  text-decoration: none; cursor: none;
-  border-radius: 12px;
-  transition: all .25s var(--ease-out-expo); position: relative; overflow: hidden;
+.btn-primary {
+  font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--bg); background: var(--t1);
+  padding: 13px 24px; text-decoration: none; border-radius: 7px;
+  transition: all .2s var(--ease);
 }
-.btn-p:hover { background: var(--c); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,217,192,0.25); }
-.btn-g {
-  font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
-  letter-spacing: -0.01em;
-  color: var(--t1); border: 1px solid var(--border);
-  background: var(--surface); padding: 14px 28px;
-  text-decoration: none; cursor: none;
-  border-radius: 12px;
-  transition: all .25s var(--ease-out-expo);
+.btn-primary:hover { background: var(--a); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(0,200,150,0.2); }
+.btn-ghost {
+  font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--t2); background: var(--s); border: 1px solid var(--bd2);
+  padding: 13px 24px; text-decoration: none; border-radius: 7px;
+  transition: all .2s var(--ease);
 }
-.btn-g:hover { border-color: var(--border-hover); color: var(--c); background: var(--surface-hover); transform: translateY(-2px); }
-.hero-stats {
-  display: flex; gap: 0; margin-top: 72px;
-  border-top: 1px solid var(--border);
-  opacity: 0; animation: fadeUp .8s .75s forwards;
+.btn-ghost:hover { color: var(--t1); border-color: var(--bd2); background: var(--s2); transform: translateY(-1px); }
+.hero-metrics {
+  display: flex; gap: 0; margin-top: 80px; padding-top: 40px;
+  border-top: 1px solid var(--bd);
+  opacity: 0; animation: fadeUp .7s .58s forwards;
 }
-.stat { flex: 1; padding: 28px 32px 0; border-right: 1px solid var(--border); }
-.stat:first-child { padding-left: 0; }
-.stat:last-child { border-right: none; }
-.stat-n { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 32px; color: var(--t1); line-height: 1; letter-spacing: -0.02em; }
-.stat-l { font-size: 13px; font-weight: 500; color: var(--t3); margin-top: 6px; }
-.bracket { display: none; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.metric { flex: 1; padding: 0 32px; border-right: 1px solid var(--bd); }
+.metric:first-child { padding-left: 0; }
+.metric:last-child { border-right: none; }
+.metric-n {
+  font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.04em;
+  color: var(--t1); line-height: 1;
+}
+.metric-l { font-size: 12px; font-weight: 400; color: var(--t3); margin-top: 8px; letter-spacing: 0.01em; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
 
-/* ABOUT */
-#about { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
-.about-wrap { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 48px; width: 100%; max-width: 100%; align-items: start; }
-.about-visual { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; margin-top: 88px; }
-.about-visual .holo { margin-bottom: 0; min-width: 0; padding: 18px 16px; display: flex; flex-direction: column; }
-.about-h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(28px,3vw,40px); line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.02em; }
-.about-h2 em { font-style: normal; color: var(--c); }
-.body-t { font-size: 16px; font-weight: 400; color: var(--t2); line-height: 1.75; margin-bottom: 16px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-.chip {
-  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-  color: var(--t2); border: 1px solid var(--border);
-  background: var(--surface); padding: 8px 14px;
-  transition: all .2s var(--ease-out-expo); cursor: default;
-  border-radius: 8px;
+/* ── ABOUT ── */
+#about { background: var(--bg1); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--a); margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
 }
-.chip:hover { border-color: var(--border-hover); color: var(--c); background: rgba(0,217,192,0.06); }
-.holo {
-  background: var(--surface); border: 1px solid var(--border);
-  padding: 24px 20px; position: relative; overflow: hidden; margin-bottom: 16px;
-  border-radius: 16px;
-  transition: all .3s var(--ease-out-expo);
+.section-label::before { content: ''; width: 16px; height: 1px; background: var(--a); }
+.about-h2 {
+  font-size: clamp(28px, 2.8vw, 42px); font-weight: 700;
+  letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 28px;
 }
-.holo:hover { border-color: var(--border-hover); background: var(--surface-hover); }
-.holo-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.05em; color: var(--c); margin-bottom: 12px; text-transform: uppercase; opacity: .7; font-weight: 500; }
-.hrow { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
-.hrow:last-child { border-bottom: none; }
-.hk { font-size: 13px; color: var(--t2); font-weight: 400; }
-.hv { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--t1); font-weight: 500; }
-.badge-live { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.02em; color: var(--c); border: 1px solid rgba(0,217,192,0.25); background: rgba(0,217,192,0.08); padding: 2px 8px; border-radius: 4px; font-weight: 500; }
-.tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: 1; }
-.tech-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 4px; background: rgba(0,0,0,0.2); border-radius: 8px; transition: all .2s var(--ease-out-expo); }
-.tech-item:hover { background: rgba(0,217,192,0.08); transform: translateY(-2px); }
-.tech-item svg { width: 18px; height: 18px; color: var(--c); }
-.tech-item span { font-size: 9px; font-weight: 500; color: var(--t2); letter-spacing: -0.01em; }
-.holo-q { font-size: 13px; font-weight: 400; color: var(--t2); line-height: 1.6; font-style: italic; flex: 1; display: flex; align-items: center; }
+.about-h2 em { font-style: normal; color: var(--a); }
+.body-text { font-size: 15px; font-weight: 400; color: var(--t2); line-height: 1.8; margin-bottom: 18px; }
+.body-text strong { color: var(--t1); font-weight: 500; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.tag {
+  font-size: 11px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--t2); background: var(--s); border: 1px solid var(--bd);
+  padding: 6px 12px; border-radius: 5px;
+  transition: all .2s;
+}
+.tag:hover { color: var(--a); border-color: var(--a-border); background: var(--a-dim); }
+.info-cards { display: flex; flex-direction: column; gap: 16px; }
+.info-card {
+  background: var(--s); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 24px 28px;
+  transition: border-color .2s;
+}
+.info-card:hover { border-color: var(--bd2); }
+.info-card-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--t3); margin-bottom: 16px;
+}
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--bd); }
+.info-row:last-child { border-bottom: none; }
+.info-key { font-size: 13px; color: var(--t3); }
+.info-val { font-size: 13px; font-weight: 500; color: var(--t1); letter-spacing: -0.01em; }
+.info-val .live { color: var(--a); }
+.quote-card {
+  background: var(--s); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 28px;
+  border-left: 2px solid var(--a);
+  transition: border-color .2s;
+}
+.quote-card:hover { border-color: var(--a); }
+.quote-text { font-size: 14px; font-weight: 400; color: var(--t2); line-height: 1.8; font-style: italic; }
+.quote-text strong { color: var(--t1); font-style: normal; font-weight: 500; }
 
-/* PRODUCTS */
+/* ── PRODUCTS ── */
 #products { background: var(--bg2); }
-.sec-head { max-width: 600px; margin-bottom: 56px; }
-.sec-h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(26px,3vw,38px); line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.02em; }
-.sec-h2 em { font-style: normal; color: var(--c); }
-.sec-desc { font-size: 16px; font-weight: 400; color: var(--t2); line-height: 1.7; margin-bottom: 4px; }
-.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.section-header { margin-bottom: 56px; }
+.section-h2 {
+  font-size: clamp(28px, 3vw, 44px); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px;
+}
+.section-h2 em { font-style: normal; color: var(--a); }
+.section-desc { font-size: 15px; color: var(--t3); line-height: 1.7; max-width: 480px; }
+.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--bd); border-radius: 16px; overflow: hidden; border: 1px solid var(--bd); }
 .pcard {
-  background: var(--surface); border: 1px solid var(--border);
-  padding: 32px 28px; position: relative; overflow: hidden;
-  transition: all .35s var(--ease-out-expo);
-  cursor: none; border-radius: 20px;
+  background: var(--bg2); padding: 36px 32px;
+  display: flex; flex-direction: column;
+  transition: background .25s var(--ease);
+  position: relative;
 }
-.pcard.featured { border-color: var(--border-hover); background: rgba(0,217,192,0.04); }
-.pcard::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(0,217,192,0.08) 0%, transparent 60%);
-  opacity: 0; transition: opacity .35s; pointer-events: none;
-}
-.pcard:hover { transform: translateY(-6px); border-color: var(--border-hover); box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,192,0.1); }
-.pcard:hover::before { opacity: 1; }
+.pcard:hover { background: var(--s2); }
+.pcard.featured { background: var(--s); }
+.pcard.featured:hover { background: var(--s2); }
 .pstatus {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.02em; font-weight: 500;
-  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; margin-bottom: 20px;
-  border-radius: 20px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 20px; margin-bottom: 24px; width: fit-content;
 }
-.ps-live { color: var(--c); border: 1px solid rgba(0,217,192,0.2); background: rgba(0,217,192,0.06); }
-.ps-live::before { content: ''; width: 5px; height: 5px; background: var(--c); border-radius: 50%; animation: pdot 2s infinite; }
-.ps-soon { color: var(--t3); border: 1px solid var(--border); background: var(--surface); }
-.ps-soon::before { content: ''; width: 5px; height: 5px; border: 1px solid var(--t3); border-radius: 50%; }
-.picon { width: 48px; height: 48px; margin-bottom: 16px; display: block; color: var(--c); }
+.ps-live { color: var(--a); background: var(--a-dim); border: 1px solid var(--a-border); }
+.ps-live::before { content:''; width:5px; height:5px; background:var(--a); border-radius:50%; animation:pulse 2s infinite; }
+.ps-soon { color: var(--t3); background: var(--s); border: 1px solid var(--bd); }
+.ps-soon::before { content:''; width:5px; height:5px; background:var(--t3); border-radius:50%; opacity:.5; }
+.picon { width: 40px; height: 40px; color: var(--a); margin-bottom: 20px; opacity: 0.7; }
 .picon svg { width: 100%; height: 100%; }
-.pname { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 10px; }
-.pname em { font-style: normal; color: var(--c); }
-.ptag { font-size: 15px; font-weight: 400; color: var(--t2); line-height: 1.6; margin-bottom: 4px; }
-.ptag-zh { font-size: 14px; color: var(--t3); line-height: 1.6; margin-bottom: 20px; }
-.pfeat { list-style: none; margin-bottom: 24px; }
+.pname {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.035em; margin-bottom: 12px;
+}
+.pname em { font-style: normal; color: var(--a); }
+.ptag { font-size: 14px; color: var(--t2); line-height: 1.65; margin-bottom: 4px; }
+.ptag-zh { font-size: 13px; color: var(--t3); line-height: 1.65; margin-bottom: 24px; }
+.pfeat { list-style: none; margin-bottom: 28px; flex: 1; }
 .pfeat li {
-  font-size: 14px; color: var(--t2); padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 10px; line-height: 1.5;
+  font-size: 13px; color: var(--t3); padding: 9px 0;
+  border-bottom: 1px solid var(--bd);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
 }
 .pfeat li:last-child { border-bottom: none; }
-.pfeat li::before { content: ''; width: 5px; height: 5px; background: var(--c); border-radius: 50%; flex-shrink: 0; opacity: 0.6; }
+.pfeat li::before { content:''; width:3px; height:3px; background:var(--a); border-radius:50%; flex-shrink:0; margin-top:7px; opacity:.6; }
 .plink {
-  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
-  color: var(--c); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  transition: all .2s var(--ease-out-expo); cursor: none;
+  font-size: 13px; font-weight: 500; color: var(--a);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  transition: gap .2s var(--ease);
+  margin-top: auto;
 }
 .plink:hover { gap: 10px; }
-.plink-off { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: -0.01em; color: var(--t4); display: inline-flex; align-items: center; gap: 6px; cursor: none; }
-.more-bar {
-  margin-top: 36px; padding: 20px 28px;
-  border: 1px dashed var(--border);
-  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400;
-  color: var(--t3); text-align: center; line-height: 1.7;
-  border-radius: 16px;
+.plink-off {
+  font-size: 13px; font-weight: 500; color: var(--t4);
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: auto;
 }
-.more-bar em { font-style: normal; color: var(--c); font-weight: 500; }
+.more-note {
+  margin-top: 24px; padding: 18px 24px;
+  border: 1px dashed var(--bd); border-radius: 10px;
+  font-size: 13px; color: var(--t3); text-align: center;
+}
+.more-note em { font-style: normal; color: var(--t2); font-weight: 500; }
 
-/* SERVICES */
-#services { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%); }
-.svc-grid { display: grid; grid-template-columns: repeat(4, minmax(280px, 1fr)); gap: 24px; width: 100%; max-width: 100%; }
+/* ── SERVICES ── */
+#services { background: var(--bg1); }
+.svc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
 .scard {
-  background: var(--surface); border: 1px solid var(--border);
-  padding: 32px 28px; position: relative; overflow: hidden;
-  transition: all .3s var(--ease-out-expo); cursor: none;
-  border-radius: 16px;
+  background: var(--s); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 32px 24px;
+  transition: all .25s var(--ease); position: relative; overflow: hidden;
 }
-.scard:hover { border-color: var(--border-hover); background: var(--surface-hover); transform: translateY(-3px); }
-.scard::after {
-  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
-  background: linear-gradient(180deg, var(--c), transparent);
-  transition: height .4s var(--ease-out-expo);
+.scard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--a), transparent);
+  opacity: 0; transition: opacity .3s;
 }
-.scard:hover::after { height: 100%; }
-.sicon { width: 40px; height: 40px; margin-bottom: 12px; color: var(--c); background: rgba(0,217,192,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.sicon svg { width: 22px; height: 22px; }
-.snum { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.02em; color: var(--c); opacity: .4; margin-bottom: 12px; font-weight: 500; }
-.stitle { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; margin-bottom: 4px; }
-.stitle-zh { font-size: 15px; color: var(--t2); margin-bottom: 14px; }
-.sdesc { font-size: 15px; font-weight: 400; color: var(--t2); line-height: 1.65; margin-bottom: 6px; }
-.sdesc-zh { font-size: 14px; color: var(--t3); line-height: 1.7; margin-bottom: 18px; }
+.scard:hover { border-color: var(--bd2); background: var(--s2); transform: translateY(-2px); }
+.scard:hover::before { opacity: 1; }
+.snum {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+  color: var(--t4); margin-bottom: 20px;
+}
+.sicon { width: 36px; height: 36px; color: var(--a); margin-bottom: 16px; opacity: .7; }
+.sicon svg { width: 100%; height: 100%; }
+.stitle { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
+.stitle-zh { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
+.sdesc { font-size: 13px; color: var(--t2); line-height: 1.7; margin-bottom: 6px; }
+.sdesc-zh { font-size: 12px; color: var(--t3); line-height: 1.7; margin-bottom: 20px; }
 .stag {
-  font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: -0.01em;
-  color: var(--c2); border: 1px solid rgba(168,85,247,0.2);
-  background: rgba(168,85,247,0.06); padding: 5px 12px; display: inline-block;
-  border-radius: 6px;
+  display: inline-block; font-size: 11px; font-weight: 500;
+  color: var(--t3); background: var(--s); border: 1px solid var(--bd);
+  padding: 4px 10px; border-radius: 4px; letter-spacing: -0.01em;
 }
 
-/* CONTACT */
-#contact { background: var(--bg3); text-align: center; min-height: auto; padding: 100px 48px 60px; }
-.contact-h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px,4vw,48px); margin-bottom: 12px; letter-spacing: -0.02em; }
-.contact-h2 em { font-style: normal; background: linear-gradient(135deg, var(--c), var(--c2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.contact-sub { font-size: 17px; color: var(--t2); margin-bottom: 4px; font-weight: 400; }
-.contact-sub-zh { font-size: 15px; color: var(--t3); margin-bottom: 48px; }
-.clinks { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 56px; }
+/* ── CONTACT ── */
+#contact { background: var(--bg2); text-align: center; }
+.contact-h2 {
+  font-size: clamp(32px, 4.5vw, 56px); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px;
+}
+.contact-h2 em { font-style: normal; color: var(--a); }
+.contact-sub { font-size: 16px; color: var(--t2); margin-bottom: 6px; }
+.contact-sub-zh { font-size: 14px; color: var(--t3); margin-bottom: 52px; }
+.clinks { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 60px; }
 .clink {
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  padding: 28px 40px; background: var(--surface);
-  border: 1px solid var(--border); text-decoration: none;
-  transition: all .3s var(--ease-out-expo); min-width: 200px; cursor: none;
-  border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 28px 44px; background: var(--s); border: 1px solid var(--bd);
+  text-decoration: none; border-radius: 12px; min-width: 220px;
+  transition: all .25s var(--ease);
 }
-.clink:hover { border-color: var(--border-hover); background: var(--surface-hover); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-.clink-icon { font-size: 22px; color: var(--c); line-height: 1; }
-.clink-type { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.05em; color: var(--t3); text-transform: uppercase; font-weight: 500; }
-.clink-val { font-size: 15px; font-weight: 500; color: var(--t1); }
+.clink:hover { border-color: var(--a-border); background: var(--a-dim); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+.clink-type { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--t3); }
+.clink-val { font-size: 14px; font-weight: 500; color: var(--t1); }
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer {
-  border-top: 1px solid var(--border); padding: 24px 48px;
+  border-top: 1px solid var(--bd); padding: 24px clamp(24px, 6vw, 80px);
   display: flex; align-items: center; justify-content: space-between;
-  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; color: var(--t3);
+  font-size: 12px; font-weight: 400; color: var(--t3);
 }
-.logo-f { font-family: 'Space Grotesk', sans-serif; color: var(--t1); font-weight: 600; letter-spacing: -0.01em; }
+.logo-f { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--t2); }
+.logo-f em { font-style: normal; color: var(--a); }
 
-/* RESPONSIVE */
-@media (max-width: 1400px) {
-  .svc-grid { grid-template-columns: repeat(4, minmax(260px, 1fr)); gap: 20px; }
-  .about-wrap { grid-template-columns: 0.85fr 1.35fr; gap: 40px; }
-}
-@media (max-width: 1200px) {
-  .about-wrap { grid-template-columns: 1fr; gap: 32px; }
-  .about-visual { grid-template-columns: repeat(3, 1fr); }
-  .svc-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-}
-@media (max-width: 1024px) {
-  .about-visual { grid-template-columns: repeat(3, 1fr); }
-  .about-visual .holo { padding: 16px 14px; }
-  .tech-grid { grid-template-columns: repeat(3, 1fr); }
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .svc-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 900px) {
-  .about-visual { grid-template-columns: 1fr; }
-  .about-visual .holo { padding: 22px 20px; }
-}
-@media (max-width: 768px) {
-  .tech-grid { grid-template-columns: repeat(2, 1fr); }
-  .svc-grid { grid-template-columns: 1fr; gap: 16px; }
-}
-@media (max-width: 860px) {
-  nav { padding: 0 20px; }
-  .nav-mid { display: none; }
-  section { padding: 80px 20px 60px; }
-  #hero { padding-left: 20px; padding-right: 20px; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .prod-grid { grid-template-columns: 1fr; }
-  .hero-stats { flex-wrap: wrap; }
-  .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 20px 0; flex: 1 1 50%; }
-  .stat:nth-child(2) { border-bottom: none; }
-  footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+  .hero-metrics { flex-wrap: wrap; }
+  .metric { flex: 1 1 45%; border-right: none; border-bottom: 1px solid var(--bd); padding: 20px 0; }
+  .metric:last-child { border-bottom: none; }
+}
+@media (max-width: 680px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section { padding: 80px 20px; }
+  .svc-grid { grid-template-columns: 1fr; }
   .clinks { flex-direction: column; align-items: center; }
-  .clink { width: 100%; max-width: 300px; }
+  .clink { width: 100%; max-width: 320px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
 }
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
-<canvas id="particle-canvas"></canvas>
-<div class="cur" id="cur-dot"></div>
-<div class="cur" id="cur-ring"></div>
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">Zero<span>AI</span></a>
-  <ul class="nav-mid">
+  <a href="#hero" class="nav-logo">Zero<em>AI</em></a>
+  <ul class="nav-links">
     <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">关于</span></a></li>
     <li><a href="#products"><span data-lang="en">Products</span><span data-lang="zh">产品</span></a></li>
     <li><a href="#services"><span data-lang="en">Services</span><span data-lang="zh">服务</span></a></li>
@@ -501,109 +428,91 @@ footer {
 </nav>
 
 <main>
+
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-badge"><div class="pulse-dot"></div>ZeroAI · Crypto × AI Builder</div>
+  <div class="hero-label"><div class="hero-dot"></div>ZeroAI · Crypto × AI Builder</div>
   <h1 class="hero-h1">
-    <span class="l1" data-lang="en">Building AI at the</span>
-    <span class="l1 zh-line" data-lang="zh">在加密与智能的</span>
-    <span class="l2" data-lang="en">Edge of Intelligence</span>
-    <span class="l2 zh-line" data-lang="zh">边界构建 AI</span>
+    <span data-lang="en"><span class="grad">Building AI<br>at the </span><span class="accent">Edge</span><span class="grad"><br>of Intelligence</span></span>
+    <span data-lang="zh"><span class="grad">在加密与智能<br>的</span><span class="accent">边界</span><span class="grad"><br>构建 AI</span></span>
   </h1>
   <div class="hero-sub">
-    <p data-lang="en">From <strong style="color:var(--t1);font-weight:600">deep crypto operations</strong> to AI product engineering — every product starts with a real business problem.</p>
-    <p data-lang="zh">从深厚的<strong style="color:var(--t1);font-weight:600">加密行业运营经验</strong>出发，每一个 AI 产品都源于真实的业务痛点。</p>
+    <p data-lang="en">From <strong>deep crypto operations</strong> to AI product engineering — every product starts with a real business problem.</p>
+    <p data-lang="zh">从深厚的<strong>加密行业运营经验</strong>出发，每一个 AI 产品都源于真实的业务痛点。</p>
   </div>
   <div class="hero-btns">
-    <a href="#products" class="btn-p"><span data-lang="en">Explore Products</span><span data-lang="zh">探索产品</span></a>
-    <a href="#contact" class="btn-g"><span data-lang="en">Work With Me</span><span data-lang="zh">合作咨询</span></a>
+    <a href="#products" class="btn-primary"><span data-lang="en">Explore Products</span><span data-lang="zh">探索产品</span></a>
+    <a href="#contact" class="btn-ghost"><span data-lang="en">Work With Me</span><span data-lang="zh">合作咨询</span></a>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-n">3</div><div class="stat-l"><span data-lang="en">AI Products</span><span data-lang="zh">AI 产品</span></div></div>
-    <div class="stat"><div class="stat-n">1</div><div class="stat-l"><span data-lang="en">Live & Deployed</span><span data-lang="zh">已上线产品</span></div></div>
-    <div class="stat"><div class="stat-n">∞</div><div class="stat-l"><span data-lang="en">Platforms Supported</span><span data-lang="zh">兼容会议平台</span></div></div>
-    <div class="stat"><div class="stat-n">Web3</div><div class="stat-l"><span data-lang="en">Native Expertise</span><span data-lang="zh">原生专业背景</span></div></div>
+  <div class="hero-metrics">
+    <div class="metric">
+      <div class="metric-n">3</div>
+      <div class="metric-l"><span data-lang="en">AI Products</span><span data-lang="zh">AI 产品</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">2</div>
+      <div class="metric-l"><span data-lang="en">Live & Deployed</span><span data-lang="zh">已上线产品</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">50+</div>
+      <div class="metric-l"><span data-lang="en">Languages Supported</span><span data-lang="zh">支持语言数</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">Web3</div>
+      <div class="metric-l"><span data-lang="en">Native Expertise</span><span data-lang="zh">原生专业背景</span></div>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" aria-label="About ZeroAI">
-  <div class="about-wrap">
+<section id="about">
+  <div class="about-grid">
     <div>
-      <div class="eyebrow rv"><span data-lang="en">// Identity</span><span data-lang="zh">// 关于我</span></div>
+      <div class="section-label rv"><span data-lang="en">About</span><span data-lang="zh">关于我</span></div>
       <h2 class="about-h2 rv d1">
         <span data-lang="en">From Crypto Ops<br>to <em>AI Builder</em></span>
         <span data-lang="zh">从加密运营<br>到 <em>AI 产品构建者</em></span>
       </h2>
-      <p class="body-t rv d2" data-lang="en">Years operating at the frontier of the crypto industry gave me something most AI builders don't have — a visceral understanding of real business pain. I know what breaks, what scales, and what users actually need.</p>
-      <p class="body-t rv d2" data-lang="zh">多年在加密行业前线的运营经验，让我拥有大多数 AI 产品人所没有的东西——对真实业务痛点的深刻理解。我清楚什么会出问题，什么能规模化，用户真正需要什么。</p>
-      <p class="body-t rv d3" data-lang="en">Now I build AI products — not to chase trends, but to solve problems I've personally lived through. ZeroAI is the vessel for that journey.</p>
-      <p class="body-t rv d3" data-lang="zh">现在我构建 AI 产品，不是为了追风口，而是为了解决我亲身经历过的问题。ZeroAI 是这段旅程的载体。</p>
-      <div class="chips rv d4">
-        <span class="chip">Crypto Operations</span>
-        <span class="chip">AI Product Dev</span>
-        <span class="chip">Web3 Native</span>
-        <span class="chip">Multi-platform</span>
-        <span class="chip">Business Automation</span>
-        <span class="chip">DeFi</span>
+      <p class="body-text rv d2" data-lang="en">Years operating at the frontier of the crypto industry gave me something most AI builders don't have — a <strong>visceral understanding of real business pain</strong>. I know what breaks, what scales, and what users actually need.</p>
+      <p class="body-text rv d2" data-lang="zh">多年在加密行业前线的运营经验，让我拥有大多数 AI 产品人所没有的东西——对<strong>真实业务痛点的深刻理解</strong>。我清楚什么会出问题，什么能规模化，用户真正需要什么。</p>
+      <p class="body-text rv d3" data-lang="en">Now I build AI products — not to chase trends, but to solve problems I've personally lived through. ZeroAI is the vessel for that journey.</p>
+      <p class="body-text rv d3" data-lang="zh">现在我构建 AI 产品，不是为了追风口，而是为了解决我亲身经历过的问题。ZeroAI 是这段旅程的载体。</p>
+      <div class="tags rv d4">
+        <span class="tag">Crypto Operations</span>
+        <span class="tag">AI Product Dev</span>
+        <span class="tag">Web3 Native</span>
+        <span class="tag">Multi-platform</span>
+        <span class="tag">Business Automation</span>
+        <span class="tag">DeFi</span>
       </div>
     </div>
-    <div class="rv d2 about-visual">
-      <div class="holo">
-        <div class="holo-label">// System.Profile</div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Identity</span><span data-lang="zh">身份</span></span><span class="hv">ZeroAI</span></div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Domain</span><span data-lang="zh">主要领域</span></span><span class="hv">Crypto × AI</span></div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Products Built</span><span data-lang="zh">已构建产品</span></span><span class="hv">3</span></div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Live Products</span><span data-lang="zh">已上线</span></span><span class="hv">1 &nbsp;<span class="badge-live">ONLINE</span></span></div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Philosophy</span><span data-lang="zh">理念</span></span><span class="hv" style="font-size:11px"><span data-lang="en">Real Use Cases</span><span data-lang="zh">真实场景优先</span></span></div>
-        <div class="hrow"><span class="hk"><span data-lang="en">Status</span><span data-lang="zh">状态</span></span><span class="hv"><span data-lang="en">Builder Mode</span><span data-lang="zh">构建中</span></span></div>
+    <div class="info-cards rv d2">
+      <div class="info-card">
+        <div class="info-card-label">Profile</div>
+        <div class="info-row"><span class="info-key"><span data-lang="en">Identity</span><span data-lang="zh">身份</span></span><span class="info-val">ZeroAI</span></div>
+        <div class="info-row"><span class="info-key"><span data-lang="en">Domain</span><span data-lang="zh">领域</span></span><span class="info-val">Crypto × AI</span></div>
+        <div class="info-row"><span class="info-key"><span data-lang="en">Products Built</span><span data-lang="zh">已构建产品</span></span><span class="info-val">3</span></div>
+        <div class="info-row"><span class="info-key"><span data-lang="en">Live Products</span><span data-lang="zh">已上线</span></span><span class="info-val"><span class="live">2 ↑</span></span></div>
+        <div class="info-row"><span class="info-key"><span data-lang="en">Philosophy</span><span data-lang="zh">理念</span></span><span class="info-val"><span data-lang="en">Real Use Cases</span><span data-lang="zh">真实场景优先</span></span></div>
+        <div class="info-row"><span class="info-key">Status</span><span class="info-val"><span data-lang="en">Builder Mode</span><span data-lang="zh">构建中</span></span></div>
       </div>
-      <div class="holo">
-        <div class="holo-label">// Tech.Stack</div>
-        <div class="tech-grid">
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>AI/ML</span>
-          </div>
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span>Full Stack</span>
-          </div>
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            <span>Web3</span>
-          </div>
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>Security</span>
-          </div>
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            <span>Global</span>
-          </div>
-          <div class="tech-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <span>Team</span>
-          </div>
-        </div>
-      </div>
-      <div class="holo">
-        <div class="holo-label">// Core.Philosophy</div>
-        <p class="holo-q" data-lang="en">"Every product I build solves a problem I've seen with my own eyes. No vaporware. No demos. Just tools that work."</p>
-        <p class="holo-q" data-lang="zh">「每一个产品，都源于我亲眼见过的真实问题。不做 PPT 产品，不做 Demo 展示，只做真正能用的工具。」</p>
+      <div class="quote-card">
+        <p class="quote-text" data-lang="en">"Every product I build solves a problem I've seen with my own eyes. No vaporware. No demos. <strong>Just tools that work.</strong>"</p>
+        <p class="quote-text" data-lang="zh">「每一个产品，都源于我亲眼见过的真实问题。不做 PPT 产品，不做 Demo 展示，<strong>只做真正能用的工具。</strong>」</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
-<section id="products" aria-label="ZeroAI Products">
-  <div class="sec-head">
-    <div class="eyebrow rv"><span data-lang="en">// Products.List</span><span data-lang="zh">// 产品列表</span></div>
-    <h2 class="sec-h2 rv d1"><span data-lang="en">Products by <em>ZeroAI</em></span><span data-lang="zh"><em>ZeroAI</em> 旗下产品</span></h2>
-    <p class="sec-desc rv d2" data-lang="en">Each product starts with a real pain point — built to be used, not just demonstrated.</p>
-    <p class="sec-desc rv d2" data-lang="zh" style="font-size:14px;color:var(--t3)">每个产品都从真实痛点出发，做真正可用的工具，而非 Demo。</p>
+<section id="products">
+  <div class="section-header">
+    <div class="section-label rv"><span data-lang="en">Products</span><span data-lang="zh">产品</span></div>
+    <h2 class="section-h2 rv d1"><span data-lang="en">Products by <em>ZeroAI</em></span><span data-lang="zh"><em>ZeroAI</em> 旗下产品</span></h2>
+    <p class="section-desc rv d2" data-lang="en">Each product starts with a real pain point — built to be used, not just demonstrated.</p>
+    <p class="section-desc rv d2" data-lang="zh">每个产品都从真实痛点出发，做真正可用的工具，而非 Demo。</p>
   </div>
+
   <div class="prod-grid">
     <!-- MeetSimul -->
     <article class="pcard featured rv" itemscope itemtype="https://schema.org/SoftwareApplication">
@@ -623,12 +532,13 @@ footer {
       <p class="ptag-zh" data-lang="zh">兼容所有主流会议系统的 AI 同声传译。</p>
       <ul class="pfeat">
         <li><span data-lang="en">Works with Zoom, Teams, Meet & more</span><span data-lang="zh">兼容 Zoom、Teams、腾讯会议等全平台</span></li>
-        <li><span data-lang="en">Real-time, low-latency translation</span><span data-lang="zh">实时翻译，极低延迟</span></li>
-        <li><span data-lang="en">Multi-language support</span><span data-lang="zh">多语言支持</span></li>
+        <li><span data-lang="en">Real-time, sub-second translation</span><span data-lang="zh">实时翻译，亚秒级延迟</span></li>
+        <li><span data-lang="en">50+ languages supported</span><span data-lang="zh">支持 50+ 语言</span></li>
         <li><span data-lang="en">Zero platform migration needed</span><span data-lang="zh">无需迁移现有会议系统</span></li>
       </ul>
-      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> &nbsp;→</a>
+      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> →</a>
     </article>
+
     <!-- PredMarket -->
     <article class="pcard rv d1" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
@@ -637,7 +547,6 @@ footer {
           <rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
           <path d="M12 32l8-12 6 8 10-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="36" cy="12" r="3" fill="currentColor"/>
-          <path d="M14 14h4v4h-4zM28 28h4v4h-4z" fill="currentColor" opacity="0.5"/>
         </svg>
       </div>
       <div class="pname">Pred<em>Market</em></div>
@@ -649,8 +558,9 @@ footer {
         <li><span data-lang="en">Built for crypto-native traders</span><span data-lang="zh">专为加密原生用户设计</span></li>
         <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
       </ul>
-      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> &nbsp;→</span>
+      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> →</span>
     </article>
+
     <!-- CryptoBox -->
     <article class="pcard rv d2" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
@@ -668,30 +578,32 @@ footer {
       <p class="ptag-zh" data-lang="zh">聚合 6 大交易所资产，API 密钥本地加密存储，零服务器风险。</p>
       <ul class="pfeat">
         <li><span data-lang="en">Binance, OKX, Bybit, Gate, Coinbase & Bitget</span><span data-lang="zh">支持 Binance、OKX、Bybit 等六大交易所</span></li>
-        <li><span data-lang="en">Keys encrypted on-device via iOS Keychain / Android Keystore</span><span data-lang="zh">密钥通过 iOS Keychain / Android Keystore 本地加密</span></li>
-        <li><span data-lang="en">No registration, no servers, read-only access</span><span data-lang="zh">无需注册，无服务器，只读权限</span></li>
-        <li><span data-lang="en">Real-time portfolio with 7/30/90-day charts</span><span data-lang="zh">实时持仓 + 7/30/90 天历史曲线</span></li>
+        <li><span data-lang="en">Keys encrypted on-device, never transmitted</span><span data-lang="zh">密钥本地加密，不上传服务器</span></li>
+        <li><span data-lang="en">No registration, read-only API access</span><span data-lang="zh">无需注册，只读权限</span></li>
+        <li><span data-lang="en">Real-time portfolio + 7/30/90-day charts</span><span data-lang="zh">实时持仓 + 历史曲线</span></li>
       </ul>
-      <a href="https://afadsfd.github.io/CryptoBox/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Try Now</span><span data-lang="zh">立即体验</span> &nbsp;→</a>
+      <a href="https://afadsfd.github.io/CryptoBox/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Try Now</span><span data-lang="zh">立即体验</span> →</a>
     </article>
   </div>
-  <div class="more-bar rv">🚀 &nbsp;<span data-lang="en">More ideas in the pipeline — <em>ZeroAI is just getting started</em></span><span data-lang="zh">更多创意正在孵化 — <em>ZeroAI 才刚开始</em></span></div>
+
+  <div class="more-note rv" style="margin-top:20px;">
+    <span data-lang="en">More products in development — <em>ZeroAI is just getting started</em></span>
+    <span data-lang="zh">更多产品正在开发中 — <em>ZeroAI 才刚开始</em></span>
+  </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services" aria-label="Services">
-  <div class="sec-head">
-    <div class="eyebrow rv"><span data-lang="en">// Services.Available</span><span data-lang="zh">// 可提供服务</span></div>
-    <h2 class="sec-h2 rv d1"><span data-lang="en">What <em>ZeroAI</em> Can Do For You</span><span data-lang="zh"><em>ZeroAI</em> 能为你做什么</span></h2>
-    <p class="sec-desc rv d2" data-lang="en">Combining deep crypto expertise with AI development capability to solve real problems.</p>
-    <p class="sec-desc rv d2" data-lang="zh" style="font-size:14px;color:var(--t3)">结合深厚的加密行业经验与 AI 开发能力，为你的业务创造真实价值。</p>
+<section id="services">
+  <div class="section-header">
+    <div class="section-label rv"><span data-lang="en">Services</span><span data-lang="zh">服务</span></div>
+    <h2 class="section-h2 rv d1"><span data-lang="en">What <em>ZeroAI</em> Can Do For You</span><span data-lang="zh"><em>ZeroAI</em> 能为你做什么</span></h2>
+    <p class="section-desc rv d2" data-lang="en">Combining deep crypto expertise with AI development capability to solve real problems.</p>
+    <p class="section-desc rv d2" data-lang="zh">结合深厚的加密行业经验与 AI 开发能力，为你的业务创造真实价值。</p>
   </div>
   <div class="svc-grid">
     <div class="scard rv">
-      <div class="sicon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
       <div class="snum">01</div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
       <div class="stitle" data-lang="en">AI Product Consulting</div>
       <div class="stitle-zh" data-lang="zh">AI 产品咨询与规划</div>
       <p class="sdesc" data-lang="en">Turn business pain points into AI product blueprints. From ideation to architecture to go-to-market strategy.</p>
@@ -699,10 +611,8 @@ footer {
       <span class="stag"><span data-lang="en">For: Founders & Teams</span><span data-lang="zh">适合：创业团队</span></span>
     </div>
     <div class="scard rv d1">
-      <div class="sicon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
       <div class="snum">02</div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <div class="stitle" data-lang="en">Meeting AI Solutions</div>
       <div class="stitle-zh" data-lang="zh">会议 AI 解决方案</div>
       <p class="sdesc" data-lang="en">Enterprise multilingual meeting systems built on MeetSimul — custom translation, transcription and automation.</p>
@@ -710,10 +620,8 @@ footer {
       <span class="stag"><span data-lang="en">For: Global Teams & DAOs</span><span data-lang="zh">适合：跨国团队 & DAO</span></span>
     </div>
     <div class="scard rv d2">
-      <div class="sicon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      </div>
       <div class="snum">03</div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
       <div class="stitle" data-lang="en">Crypto × AI Development</div>
       <div class="stitle-zh" data-lang="zh">加密 × AI 产品开发</div>
       <p class="sdesc" data-lang="en">AI tooling built for the crypto industry: asset management, data analytics, and operational automation.</p>
@@ -721,10 +629,8 @@ footer {
       <span class="stag"><span data-lang="en">For: Exchanges & Projects</span><span data-lang="zh">适合：交易所 & 项目方</span></span>
     </div>
     <div class="scard rv d3">
-      <div class="sicon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
       <div class="snum">04</div>
+      <div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
       <div class="stitle" data-lang="en">Partnership & Collaboration</div>
       <div class="stitle-zh" data-lang="zh">早期项目合作</div>
       <p class="sdesc" data-lang="en">Open to early-stage collaborations. If you need a builder with Crypto + AI background, let's talk.</p>
@@ -735,119 +641,54 @@ footer {
 </section>
 
 <!-- CONTACT -->
-<section id="contact" aria-label="Contact">
-  <div class="eyebrow rv" style="justify-content:center"><span data-lang="en">// Contact.Init</span><span data-lang="zh">// 建立连接</span></div>
+<section id="contact">
+  <div class="section-label rv" style="justify-content:center"><span data-lang="en">Contact</span><span data-lang="zh">联系</span></div>
   <h2 class="contact-h2 rv d1"><span data-lang="en">Let's <em>Connect</em></span><span data-lang="zh">与我 <em>建立连接</em></span></h2>
   <p class="contact-sub rv d2" data-lang="en">Have a product idea? Want to collaborate? Let's talk.</p>
   <p class="contact-sub-zh rv d2" data-lang="zh">有产品想法？想聊聊合作？随时联系。</p>
   <div class="clinks rv d3">
     <a href="mailto:lz3862680@gmail.com" class="clink">
-      <span class="clink-icon">✉</span>
       <span class="clink-type">Email</span>
       <span class="clink-val">lz3862680@gmail.com</span>
     </a>
     <a href="https://t.me/sky87531" target="_blank" class="clink">
-      <span class="clink-icon">✈</span>
       <span class="clink-type">Telegram</span>
       <span class="clink-val">@sky87531</span>
     </a>
   </div>
 </section>
+
 </main>
 
 <footer>
-  <span class="logo-f">ZeroAI</span>
+  <span class="logo-f">Zero<em>AI</em></span>
   <span data-lang="en">© 2025 ZeroAI · All rights reserved</span>
   <span data-lang="zh">© 2025 ZeroAI · 保留所有权利</span>
-  <span style="color:var(--t4)">Crypto × Intelligence</span>
+  <span>Crypto × Intelligence</span>
 </footer>
 
 <script>
-/* LANG */
 function setLang(l) {
   document.body.classList.toggle('zh', l==='zh');
   document.getElementById('btn-en').classList.toggle('on', l==='en');
   document.getElementById('btn-zh').classList.toggle('on', l==='zh');
 }
 
-/* CURSOR */
-const dot=document.getElementById('cur-dot'), ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function tick(){
-  dot.style.left=mx+'px'; dot.style.top=my+'px';
-  rx+=(mx-rx)*.14; ry+=(my-ry)*.14;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(tick);
-})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
-});
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 
-/* PARTICLES */
-const cv=document.getElementById('particle-canvas'), c=cv.getContext('2d');
-let W,H;
-function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
-resize(); window.addEventListener('resize',resize);
-class Pt {
-  constructor(){this.reset(true);}
-  reset(init){
-    this.x=Math.random()*W; this.y=init?Math.random()*H:Math.random()*H;
-    this.vx=(Math.random()-.5)*.28; this.vy=(Math.random()-.5)*.28;
-    this.r=Math.random()*1.3+.25; this.a=Math.random()*.5+.1;
-    this.col=Math.random()>.88?'#bf00ff':'#00ffe7';
-  }
-  step(){this.x+=this.vx;this.y+=this.vy;if(this.x<-5||this.x>W+5||this.y<-5||this.y>H+5)this.reset();}
-  draw(){c.beginPath();c.arc(this.x,this.y,this.r,0,Math.PI*2);c.fillStyle=this.col;c.globalAlpha=this.a;c.fill();c.globalAlpha=1;}
-}
-class Sk {
-  constructor(){this.reset();}
-  reset(){
-    this.x=Math.random()*W*.8+W*.1; this.y=Math.random()*H*.5;
-    this.len=Math.random()*100+50; this.spd=Math.random()*3.5+2;
-    this.a=Math.random()*.35+.08; this.ang=Math.PI*.25+(Math.random()-.5)*.35;
-    this.life=0; this.maxL=this.len/this.spd+8;
-  }
-  step(){this.x+=Math.cos(this.ang)*this.spd;this.y+=Math.sin(this.ang)*this.spd;this.life++;if(this.life>this.maxL+15)this.reset();}
-  draw(){
-    const pr=this.life/this.maxL, al=this.a*Math.sin(Math.min(pr,1)*Math.PI);
-    const tx=this.x-Math.cos(this.ang)*this.len*Math.min(pr,1);
-    const ty=this.y-Math.sin(this.ang)*this.len*Math.min(pr,1);
-    const g=c.createLinearGradient(tx,ty,this.x,this.y);
-    g.addColorStop(0,'transparent'); g.addColorStop(1,`rgba(0,255,231,${al})`);
-    c.beginPath();c.moveTo(tx,ty);c.lineTo(this.x,this.y);c.strokeStyle=g;c.lineWidth=.9;c.stroke();
-  }
-}
-const pts=[...Array(180)].map(()=>new Pt());
-const stk=[...Array(10)].map(()=>new Sk());
-let fr=0;
-(function anim(){
-  c.clearRect(0,0,W,H);
-  pts.forEach(p=>{p.step();p.draw();});
-  if(fr%2===0){
-    const MD=95;
-    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
-      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<MD){c.beginPath();c.moveTo(pts[i].x,pts[i].y);c.lineTo(pts[j].x,pts[j].y);c.strokeStyle=`rgba(0,255,231,${.045*(1-d/MD)})`;c.lineWidth=.4;c.stroke();}
-    }
-  }
-  stk.forEach(s=>{s.step();s.draw();});
-  fr++; requestAnimationFrame(anim);
-})();
-
-/* SCROLL REVEAL */
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-
-/* ACTIVE NAV */
-const secs=document.querySelectorAll('section');
-const nls=document.querySelectorAll('.nav-mid a');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});
-  nls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
-},{passive:true});
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const onScroll = () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+};
+window.addEventListener('scroll', onScroll, { passive: true });
 </script>
 </body>
 </html>
