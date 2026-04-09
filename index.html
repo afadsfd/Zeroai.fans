@@ -3,9 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZeroAI — Building AI at the Edge</title>
+<title>ZeroAI — Building AI at the Edge | Crypto × AI Products</title>
+<meta name="description" content="ZeroAI builds AI products at the intersection of crypto and intelligence. MeetSimul - AI-powered meeting interpretation, PredMarket - prediction market aggregator, CryptoVault - cross-platform asset management.">
+<meta name="keywords" content="ZeroAI, AI products, crypto, Web3, MeetSimul, AI interpretation, prediction market, CryptoVault, blockchain, AI builder">
+<meta name="author" content="ZeroAI">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.zeroai.fans/">
+<meta property="og:title" content="ZeroAI — Building AI at the Edge">
+<meta property="og:description" content="ZeroAI builds AI products at the intersection of crypto and intelligence. From deep crypto operations to AI product engineering.">
+<meta property="og:image" content="https://www.zeroai.fans/og-image.svg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.zeroai.fans/">
+<meta property="twitter:title" content="ZeroAI — Building AI at the Edge">
+<meta property="twitter:description" content="ZeroAI builds AI products at the intersection of crypto and intelligence.">
+<meta property="twitter:image" content="https://www.zeroai.fans/og-image.svg">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://www.zeroai.fans/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ZeroAI",
+  "url": "https://www.zeroai.fans/",
+  "logo": "https://www.zeroai.fans/logo.png",
+  "description": "ZeroAI builds AI products at the intersection of crypto and intelligence.",
+  "founder": {
+    "@type": "Person",
+    "name": "ZeroAI"
+  },
+  "sameAs": [
+    "https://t.me/sky87531"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Products",
+    "itemListElement": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "MeetSimul",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "PredMarket",
+        "applicationCategory": "FinanceApplication"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "CryptoVault",
+        "applicationCategory": "FinanceApplication"
+      }
+    ]
+  }
+}
+</script>
+
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -40,12 +112,10 @@ body {
 }
 
 /* LANG */
-[data-lang="zh"] { display: none; }
-body.zh [data-lang="en"] { display: none; }
-body.zh [data-lang="zh"] { display: block; }
-body.zh span[data-lang="zh"] { display: inline; }
-body.zh span[data-lang="en"] { display: none; }
-span[data-lang="zh"] { display: none; }
+[data-lang="zh"], span[data-lang="zh"] { display: none !important; }
+body.zh [data-lang="en"], body.zh span[data-lang="en"] { display: none !important; }
+body.zh [data-lang="zh"] { display: block !important; }
+body.zh span[data-lang="zh"] { display: inline !important; }
 
 /* OVERLAYS */
 #particle-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
@@ -174,6 +244,7 @@ section:not(#hero) { border-top: 1px solid var(--border); }
   background: linear-gradient(135deg, var(--c) 0%, #5eead4 50%, var(--c2) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
+.hero-h1 .zh-line { font-size: clamp(28px, 4.2vw, 58px); }
 .hero-sub {
   max-width: 520px; margin-bottom: 40px;
   opacity: 0; animation: fadeUp .8s .45s forwards;
@@ -269,7 +340,7 @@ section:not(#hero) { border-top: 1px solid var(--border); }
 .pcard::before {
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse at 50% 0%, rgba(0,217,192,0.08) 0%, transparent 60%);
-  opacity: 0; transition: opacity .35s;
+  opacity: 0; transition: opacity .35s; pointer-events: none;
 }
 .pcard:hover { transform: translateY(-6px); border-color: var(--border-hover); box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,192,0.1); }
 .pcard:hover::before { opacity: 1; }
@@ -435,9 +506,9 @@ footer {
   <div class="hero-badge"><div class="pulse-dot"></div>ZeroAI · Crypto × AI Builder</div>
   <h1 class="hero-h1">
     <span class="l1" data-lang="en">Building AI at the</span>
-    <span class="l1" data-lang="zh" style="font-size:clamp(28px,4.2vw,58px)">在加密与智能的</span>
+    <span class="l1 zh-line" data-lang="zh">在加密与智能的</span>
     <span class="l2" data-lang="en">Edge of Intelligence</span>
-    <span class="l2" data-lang="zh" style="font-size:clamp(28px,4.2vw,58px)">边界构建 AI</span>
+    <span class="l2 zh-line" data-lang="zh">边界构建 AI</span>
   </h1>
   <div class="hero-sub">
     <p data-lang="en">From <strong style="color:var(--t1);font-weight:600">deep crypto operations</strong> to AI product engineering — every product starts with a real business problem.</p>
@@ -456,7 +527,7 @@ footer {
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-label="About ZeroAI">
   <div class="about-wrap">
     <div>
       <div class="eyebrow rv"><span data-lang="en">// Identity</span><span data-lang="zh">// 关于我</span></div>
@@ -526,7 +597,7 @@ footer {
 </section>
 
 <!-- PRODUCTS -->
-<section id="products">
+<section id="products" aria-label="ZeroAI Products">
   <div class="sec-head">
     <div class="eyebrow rv"><span data-lang="en">// Products.List</span><span data-lang="zh">// 产品列表</span></div>
     <h2 class="sec-h2 rv d1"><span data-lang="en">Products by <em>ZeroAI</em></span><span data-lang="zh"><em>ZeroAI</em> 旗下产品</span></h2>
@@ -535,7 +606,7 @@ footer {
   </div>
   <div class="prod-grid">
     <!-- MeetSimul -->
-    <div class="pcard featured rv">
+    <article class="pcard featured rv" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
       <div class="picon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -556,10 +627,10 @@ footer {
         <li><span data-lang="en">Multi-language support</span><span data-lang="zh">多语言支持</span></li>
         <li><span data-lang="en">Zero platform migration needed</span><span data-lang="zh">无需迁移现有会议系统</span></li>
       </ul>
-      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> &nbsp;→</a>
-    </div>
+      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> &nbsp;→</a>
+    </article>
     <!-- PredMarket -->
-    <div class="pcard rv d1">
+    <article class="pcard rv d1" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
       <div class="picon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -579,9 +650,9 @@ footer {
         <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
       </ul>
       <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> &nbsp;→</span>
-    </div>
+    </article>
     <!-- CryptoVault -->
-    <div class="pcard rv d2">
+    <article class="pcard rv d2" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-soon"><span data-lang="en">IN DEVELOPMENT</span><span data-lang="zh">开发中</span></span>
       <div class="picon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -602,13 +673,13 @@ footer {
         <li><span data-lang="en">Real-time balance tracking</span><span data-lang="zh">实时余额追踪</span></li>
       </ul>
       <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> &nbsp;→</span>
-    </div>
+    </article>
   </div>
   <div class="more-bar rv">🚀 &nbsp;<span data-lang="en">More ideas in the pipeline — <em>ZeroAI is just getting started</em></span><span data-lang="zh">更多创意正在孵化 — <em>ZeroAI 才刚开始</em></span></div>
 </section>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" aria-label="Services">
   <div class="sec-head">
     <div class="eyebrow rv"><span data-lang="en">// Services.Available</span><span data-lang="zh">// 可提供服务</span></div>
     <h2 class="sec-h2 rv d1"><span data-lang="en">What <em>ZeroAI</em> Can Do For You</span><span data-lang="zh"><em>ZeroAI</em> 能为你做什么</span></h2>
@@ -664,7 +735,7 @@ footer {
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-label="Contact">
   <div class="eyebrow rv" style="justify-content:center"><span data-lang="en">// Contact.Init</span><span data-lang="zh">// 建立连接</span></div>
   <h2 class="contact-h2 rv d1"><span data-lang="en">Let's <em>Connect</em></span><span data-lang="zh">与我 <em>建立连接</em></span></h2>
   <p class="contact-sub rv d2" data-lang="en">Have a product idea? Want to collaborate? Let's talk.</p>
