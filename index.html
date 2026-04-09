@@ -84,12 +84,23 @@ body.zh [data-lang="zh"] { display: block !important; }
 body.zh span[data-lang="zh"] { display: inline !important; }
 body.zh span[data-lang="en"] { display: none !important; }
 
-/* NOISE OVERLAY */
+/* GRID OVERLAY */
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 20%, transparent 75%);
+}
+
+/* NOISE OVERLAY */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.045; mix-blend-mode: overlay;
 }
 
 /* SCROLL REVEAL */
@@ -148,7 +159,10 @@ section + section { border-top: 1px solid var(--bd); }
 #hero {
   min-height: 100vh; padding-top: 60px;
   display: flex; flex-direction: column; justify-content: center;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,150,0.06) 0%, transparent 70%);
+  background:
+    radial-gradient(ellipse 90% 55% at 15% 50%, rgba(0,200,150,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 85% 20%, rgba(0,150,255,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0,200,150,0.04) 0%, transparent 70%);
 }
 .hero-label {
   display: inline-flex; align-items: center; gap: 8px;
@@ -216,7 +230,10 @@ section + section { border-top: 1px solid var(--bd); }
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
 
 /* ── ABOUT ── */
-#about { background: var(--bg1); }
+#about {
+  background: var(--bg1);
+  background-image: radial-gradient(ellipse 80% 50% at 100% 50%, rgba(0,200,150,0.04) 0%, transparent 60%);
+}
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .section-label {
   font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
@@ -359,7 +376,11 @@ section + section { border-top: 1px solid var(--bd); }
 }
 
 /* ── CONTACT ── */
-#contact { background: var(--bg2); text-align: center; }
+#contact {
+  background: var(--bg2);
+  background-image: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,200,150,0.06) 0%, transparent 70%);
+  text-align: center;
+}
 .contact-h2 {
   font-size: clamp(32px, 4.5vw, 56px); font-weight: 700;
   letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px;
@@ -539,30 +560,8 @@ footer {
       <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> →</a>
     </article>
 
-    <!-- PredMarket -->
-    <article class="pcard rv d1" itemscope itemtype="https://schema.org/SoftwareApplication">
-      <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
-      <div class="picon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
-          <path d="M12 32l8-12 6 8 10-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="36" cy="12" r="3" fill="currentColor"/>
-        </svg>
-      </div>
-      <div class="pname">Pred<em>Market</em></div>
-      <p class="ptag" data-lang="en">The aggregator for prediction markets — all platforms, one view.</p>
-      <p class="ptag-zh" data-lang="zh">预测市场聚合器，一站式参与多平台预测机会。</p>
-      <ul class="pfeat">
-        <li><span data-lang="en">Multi-platform data aggregation</span><span data-lang="zh">多平台数据聚合</span></li>
-        <li><span data-lang="en">Real-time market discovery</span><span data-lang="zh">实时市场发现</span></li>
-        <li><span data-lang="en">Built for crypto-native traders</span><span data-lang="zh">专为加密原生用户设计</span></li>
-        <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
-      </ul>
-      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> →</span>
-    </article>
-
     <!-- CryptoBox -->
-    <article class="pcard rv d2" itemscope itemtype="https://schema.org/SoftwareApplication">
+    <article class="pcard rv d1" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
       <div class="picon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -583,6 +582,28 @@ footer {
         <li><span data-lang="en">Real-time portfolio + 7/30/90-day charts</span><span data-lang="zh">实时持仓 + 历史曲线</span></li>
       </ul>
       <a href="https://afadsfd.github.io/CryptoBox/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Try Now</span><span data-lang="zh">立即体验</span> →</a>
+    </article>
+
+    <!-- PredMarket -->
+    <article class="pcard rv d2" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
+      <div class="picon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 32l8-12 6 8 10-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="36" cy="12" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="pname">Pred<em>Market</em></div>
+      <p class="ptag" data-lang="en">The aggregator for prediction markets — all platforms, one view.</p>
+      <p class="ptag-zh" data-lang="zh">预测市场聚合器，一站式参与多平台预测机会。</p>
+      <ul class="pfeat">
+        <li><span data-lang="en">Multi-platform data aggregation</span><span data-lang="zh">多平台数据聚合</span></li>
+        <li><span data-lang="en">Real-time market discovery</span><span data-lang="zh">实时市场发现</span></li>
+        <li><span data-lang="en">Built for crypto-native traders</span><span data-lang="zh">专为加密原生用户设计</span></li>
+        <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
+      </ul>
+      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> →</span>
     </article>
   </div>
 
@@ -668,6 +689,7 @@ footer {
 </footer>
 
 <script>
+
 function setLang(l) {
   document.body.classList.toggle('zh', l==='zh');
   document.getElementById('btn-en').classList.toggle('on', l==='en');
