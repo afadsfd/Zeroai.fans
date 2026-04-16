@@ -290,59 +290,109 @@ section + section { border-top: 1px solid var(--bd); }
 }
 .section-h2 em { font-style: normal; color: var(--a); }
 .section-desc { font-size: 15px; color: var(--t3); line-height: 1.7; max-width: 480px; }
-.prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--bd); border-radius: 16px; overflow: hidden; border: 1px solid var(--bd); }
+
+/* Live products: 2-col top row */
+.prod-live { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* Coming soon: slim full-width banner */
+.prod-soon { display: grid; grid-template-columns: 1fr; }
+
 .pcard {
-  background: var(--bg2); padding: 36px 32px;
+  background: var(--s); border: 1px solid var(--bd);
+  border-radius: 16px; padding: 40px 40px 36px;
   display: flex; flex-direction: column;
-  transition: background .25s var(--ease);
-  position: relative;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+  position: relative; overflow: hidden;
 }
-.pcard:hover { background: var(--s2); }
-.pcard.featured { background: var(--s); }
-.pcard.featured:hover { background: var(--s2); }
+.pcard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 10%, var(--a) 50%, transparent 90%);
+  opacity: 0; transition: opacity .3s;
+}
+.pcard:hover { border-color: var(--bd2); background: var(--s2); }
+.pcard:hover::before { opacity: 0.6; }
+.pcard.featured { border-color: var(--a-border); background: rgba(0,200,150,0.03); }
+.pcard.featured::before { opacity: 0.4; }
+.pcard.featured:hover { background: rgba(0,200,150,0.05); }
+
+/* Compact soon card */
+.pcard-soon {
+  background: var(--s); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 24px 32px;
+  display: flex; align-items: center; gap: 32px;
+  transition: border-color .2s;
+}
+.pcard-soon:hover { border-color: var(--bd2); }
+.pcard-soon-main { display: flex; align-items: center; gap: 20px; flex: 1; min-width: 0; }
+.pcard-soon-info { flex: 1; min-width: 0; }
+.pcard-soon-feats { display: flex; gap: 24px; flex-shrink: 0; }
+.soon-feat { font-size: 12px; color: var(--t3); display: flex; align-items: center; gap: 6px; }
+.soon-feat::before { content:''; width:3px; height:3px; background:var(--t3); border-radius:50%; opacity:.5; }
+
 .pstatus {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 5px 10px; border-radius: 20px; margin-bottom: 24px; width: fit-content;
+  padding: 5px 10px; border-radius: 20px; margin-bottom: 28px; width: fit-content;
 }
 .ps-live { color: var(--a); background: var(--a-dim); border: 1px solid var(--a-border); }
 .ps-live::before { content:''; width:5px; height:5px; background:var(--a); border-radius:50%; animation:pulse 2s infinite; }
 .ps-soon { color: var(--t3); background: var(--s); border: 1px solid var(--bd); }
 .ps-soon::before { content:''; width:5px; height:5px; background:var(--t3); border-radius:50%; opacity:.5; }
-.picon { width: 40px; height: 40px; color: var(--a); margin-bottom: 20px; opacity: 0.7; }
+
+.picon { width: 44px; height: 44px; color: var(--a); margin-bottom: 24px; opacity: 0.75; }
 .picon svg { width: 100%; height: 100%; }
-.pname {
-  font-size: 22px; font-weight: 700; letter-spacing: -0.035em; margin-bottom: 12px;
-}
+.picon-sm { width: 32px; height: 32px; color: var(--t3); opacity: 0.5; flex-shrink: 0; }
+.picon-sm svg { width: 100%; height: 100%; }
+
+.pname { font-size: 26px; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 10px; }
 .pname em { font-style: normal; color: var(--a); }
-.ptag { font-size: 14px; color: var(--t2); line-height: 1.65; margin-bottom: 4px; }
-.ptag-zh { font-size: 13px; color: var(--t3); line-height: 1.65; margin-bottom: 24px; }
+.pname-sm { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
+.pname-sm em { font-style: normal; color: var(--t2); }
+
+.ptag { font-size: 15px; color: var(--t2); line-height: 1.6; margin-bottom: 4px; }
+.ptag-zh { font-size: 13px; color: var(--t3); line-height: 1.6; margin-bottom: 28px; }
+.ptag-sm { font-size: 13px; color: var(--t3); line-height: 1.5; }
+
+/* Metrics row */
+.pmetrics { display: flex; gap: 0; margin-bottom: 28px; padding: 20px 0; border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd); }
+.pm { flex: 1; text-align: center; border-right: 1px solid var(--bd); padding: 0 12px; }
+.pm:last-child { border-right: none; }
+.pm-n { font-size: 22px; font-weight: 700; letter-spacing: -0.04em; color: var(--t1); line-height: 1; margin-bottom: 4px; }
+.pm-l { font-size: 10px; color: var(--t3); letter-spacing: 0.03em; line-height: 1.4; }
+
+/* Exchanges strip */
+.exchanges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.exch { font-size: 11px; font-weight: 500; color: var(--t3); background: var(--s); border: 1px solid var(--bd); padding: 5px 10px; border-radius: 5px; letter-spacing: -0.01em; }
+
 .pfeat { list-style: none; margin-bottom: 28px; flex: 1; }
 .pfeat li {
-  font-size: 13px; color: var(--t3); padding: 9px 0;
+  font-size: 13px; color: var(--t3); padding: 10px 0;
   border-bottom: 1px solid var(--bd);
   display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
 }
 .pfeat li:last-child { border-bottom: none; }
 .pfeat li::before { content:''; width:3px; height:3px; background:var(--a); border-radius:50%; flex-shrink:0; margin-top:7px; opacity:.6; }
+
 .plink {
-  font-size: 13px; font-weight: 500; color: var(--a);
-  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  transition: gap .2s var(--ease);
-  margin-top: auto;
+  font-size: 14px; font-weight: 600; color: var(--a);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .2s var(--ease); margin-top: auto;
+  padding: 13px 20px; border-radius: 8px; background: var(--a-dim);
+  border: 1px solid var(--a-border); width: fit-content;
 }
-.plink:hover { gap: 10px; }
+.plink:hover { gap: 12px; background: rgba(0,200,150,0.15); }
 .plink-off {
-  font-size: 13px; font-weight: 500; color: var(--t4);
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: auto;
+  font-size: 12px; font-weight: 500; color: var(--t4);
+  display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
 }
 .more-note {
-  margin-top: 24px; padding: 18px 24px;
+  margin-top: 16px; padding: 16px 24px;
   border: 1px dashed var(--bd); border-radius: 10px;
   font-size: 13px; color: var(--t3); text-align: center;
 }
 .more-note em { font-style: normal; color: var(--t2); font-weight: 500; }
+@media (max-width: 900px) { .prod-live { grid-template-columns: 1fr; } }
+@media (max-width: 680px) { .pcard-soon { flex-direction: column; align-items: flex-start; gap: 16px; } .pcard-soon-feats { display: none; } }
 
 /* ── SERVICES ── */
 #services { background: var(--bg1); }
@@ -534,7 +584,8 @@ footer {
     <p class="section-desc rv d2" data-lang="zh">每个产品都从真实痛点出发，做真正可用的工具，而非 Demo。</p>
   </div>
 
-  <div class="prod-grid">
+  <!-- Live products: large 2-col -->
+  <div class="prod-live">
     <!-- MeetSimul -->
     <article class="pcard featured rv" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
@@ -549,15 +600,21 @@ footer {
         </svg>
       </div>
       <div class="pname">Meet<em>Simul</em></div>
-      <p class="ptag" data-lang="en">AI-powered simultaneous interpretation for every meeting platform.</p>
-      <p class="ptag-zh" data-lang="zh">兼容所有主流会议系统的 AI 同声传译。</p>
+      <p class="ptag" data-lang="en">AI-powered simultaneous interpretation for every online meeting — speak your language, they hear theirs.</p>
+      <p class="ptag-zh" data-lang="zh">AI 驱动的实时同声传译，兼容所有主流会议平台。你说中文，对方听英文。</p>
+      <div class="pmetrics">
+        <div class="pm"><div class="pm-n">&lt;0.5s</div><div class="pm-l"><span data-lang="en">Latency</span><span data-lang="zh">延迟</span></div></div>
+        <div class="pm"><div class="pm-n">50+</div><div class="pm-l"><span data-lang="en">Languages</span><span data-lang="zh">支持语种</span></div></div>
+        <div class="pm"><div class="pm-n">7+</div><div class="pm-l"><span data-lang="en">Platforms</span><span data-lang="zh">会议平台</span></div></div>
+        <div class="pm"><div class="pm-n">Free</div><div class="pm-l"><span data-lang="en">To Try</span><span data-lang="zh">试用</span></div></div>
+      </div>
       <ul class="pfeat">
-        <li><span data-lang="en">Works with Zoom, Teams, Meet & more</span><span data-lang="zh">兼容 Zoom、Teams、腾讯会议等全平台</span></li>
-        <li><span data-lang="en">Real-time, sub-second translation</span><span data-lang="zh">实时翻译，亚秒级延迟</span></li>
-        <li><span data-lang="en">50+ languages supported</span><span data-lang="zh">支持 50+ 语言</span></li>
-        <li><span data-lang="en">Zero platform migration needed</span><span data-lang="zh">无需迁移现有会议系统</span></li>
+        <li><span data-lang="en">Zoom, Teams, Meet, Webex, 腾讯会议, 飞书, 钉钉</span><span data-lang="zh">兼容 Zoom、Teams、腾讯会议、飞书、钉钉等 7+ 平台</span></li>
+        <li><span data-lang="en">System-level audio bridge — no plugins or API keys required</span><span data-lang="zh">系统级音频桥接，无需插件，无需平台 API</span></li>
+        <li><span data-lang="en">Natural AI voice synthesis — sounds human, not robotic</span><span data-lang="zh">AI 自然语音合成，听起来像真人，不像机器</span></li>
+        <li><span data-lang="en">14-day free trial, macOS app, under 6MB</span><span data-lang="zh">14 天免费试用，macOS 应用，不足 6MB</span></li>
       </ul>
-      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App</span><span data-lang="zh">立即体验</span> →</a>
+      <a href="https://afadsfd.github.io/AI/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Launch App →</span><span data-lang="zh">立即体验 →</span></a>
     </article>
 
     <!-- CryptoBox -->
@@ -573,41 +630,65 @@ footer {
         </svg>
       </div>
       <div class="pname">Crypto<em>Box</em></div>
-      <p class="ptag" data-lang="en">All your exchange balances, one dashboard. API keys never leave your device.</p>
-      <p class="ptag-zh" data-lang="zh">聚合 6 大交易所资产，API 密钥本地加密存储，零服务器风险。</p>
-      <ul class="pfeat">
-        <li><span data-lang="en">Binance, OKX, Bybit, Gate, Coinbase & Bitget</span><span data-lang="zh">支持 Binance、OKX、Bybit 等六大交易所</span></li>
-        <li><span data-lang="en">Keys encrypted on-device, never transmitted</span><span data-lang="zh">密钥本地加密，不上传服务器</span></li>
-        <li><span data-lang="en">No registration, read-only API access</span><span data-lang="zh">无需注册，只读权限</span></li>
-        <li><span data-lang="en">Real-time portfolio + 7/30/90-day charts</span><span data-lang="zh">实时持仓 + 历史曲线</span></li>
-      </ul>
-      <a href="https://afadsfd.github.io/CryptoBox/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Try Now</span><span data-lang="zh">立即体验</span> →</a>
-    </article>
-
-    <!-- PredMarket -->
-    <article class="pcard rv d2" itemscope itemtype="https://schema.org/SoftwareApplication">
-      <span class="pstatus ps-soon"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
-      <div class="picon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
-          <path d="M12 32l8-12 6 8 10-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="36" cy="12" r="3" fill="currentColor"/>
-        </svg>
+      <p class="ptag" data-lang="en">All your exchange balances in one dashboard. API keys encrypted on-device, never leave your phone.</p>
+      <p class="ptag-zh" data-lang="zh">聚合多交易所资产，API 密钥本地加密存储，零服务器风险，一屏掌握全部持仓。</p>
+      <div class="pmetrics">
+        <div class="pm"><div class="pm-n">6</div><div class="pm-l"><span data-lang="en">Exchanges</span><span data-lang="zh">交易所</span></div></div>
+        <div class="pm"><div class="pm-n">0</div><div class="pm-l"><span data-lang="en">Registration</span><span data-lang="zh">注册</span></div></div>
+        <div class="pm"><div class="pm-n">Free</div><div class="pm-l"><span data-lang="en">Forever</span><span data-lang="zh">永久免费</span></div></div>
+        <div class="pm"><div class="pm-n">Local</div><div class="pm-l"><span data-lang="en">Keys Only</span><span data-lang="zh">密钥本地</span></div></div>
       </div>
-      <div class="pname">Pred<em>Market</em></div>
-      <p class="ptag" data-lang="en">The aggregator for prediction markets — all platforms, one view.</p>
-      <p class="ptag-zh" data-lang="zh">预测市场聚合器，一站式参与多平台预测机会。</p>
+      <div class="exchanges">
+        <span class="exch">Binance</span>
+        <span class="exch">OKX</span>
+        <span class="exch">Bybit</span>
+        <span class="exch">Gate</span>
+        <span class="exch">Coinbase</span>
+        <span class="exch">Bitget</span>
+      </div>
       <ul class="pfeat">
-        <li><span data-lang="en">Multi-platform data aggregation</span><span data-lang="zh">多平台数据聚合</span></li>
-        <li><span data-lang="en">Real-time market discovery</span><span data-lang="zh">实时市场发现</span></li>
-        <li><span data-lang="en">Built for crypto-native traders</span><span data-lang="zh">专为加密原生用户设计</span></li>
-        <li><span data-lang="en">Information arbitrage tooling</span><span data-lang="zh">信息套利工具</span></li>
+        <li><span data-lang="en">iOS Keychain / Android Keystore — hardware-level encryption</span><span data-lang="zh">iOS Keychain / Android Keystore 硬件级加密</span></li>
+        <li><span data-lang="en">Read-only API access — no withdrawal risk, ever</span><span data-lang="zh">只读 API，从架构上杜绝提币风险</span></li>
+        <li><span data-lang="en">Real-time P&L with 7 / 30 / 90-day history charts</span><span data-lang="zh">实时持仓盈亏 + 7/30/90 天历史曲线</span></li>
+        <li><span data-lang="en">~21MB install, no account, no tracking</span><span data-lang="zh">约 21MB，无账号，无追踪</span></li>
       </ul>
-      <span class="plink-off"><span data-lang="en">Join Waitlist</span><span data-lang="zh">加入等待名单</span> →</span>
+      <a href="https://afadsfd.github.io/CryptoBox/" target="_blank" class="plink" itemprop="url"><span data-lang="en">Try Now →</span><span data-lang="zh">立即体验 →</span></a>
     </article>
   </div>
 
-  <div class="more-note rv" style="margin-top:20px;">
+  <!-- PredMarket: compact coming soon banner -->
+  <div class="prod-soon rv d2">
+    <article class="pcard-soon" itemscope itemtype="https://schema.org/SoftwareApplication">
+      <div class="pcard-soon-main">
+        <div class="picon-sm">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 32l8-12 6 8 10-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="12" r="3" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="pcard-soon-info">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <span class="pname-sm">Pred<em>Market</em></span>
+            <span class="pstatus ps-soon" style="margin-bottom:0"><span data-lang="en">COMING SOON</span><span data-lang="zh">即将上线</span></span>
+          </div>
+          <p class="ptag-sm" data-lang="en">Prediction market aggregator — all platforms, one view, built for crypto-native traders.</p>
+          <p class="ptag-sm" data-lang="zh">预测市场聚合器，多平台数据汇总，专为加密原生用户打造。</p>
+        </div>
+      </div>
+      <div class="pcard-soon-feats">
+        <span class="soon-feat" data-lang="en">Multi-platform</span>
+        <span class="soon-feat" data-lang="en">Real-time data</span>
+        <span class="soon-feat" data-lang="en">Info arbitrage</span>
+        <span class="soon-feat" data-lang="zh">多平台聚合</span>
+        <span class="soon-feat" data-lang="zh">实时数据</span>
+        <span class="soon-feat" data-lang="zh">信息套利</span>
+      </div>
+      <span class="plink-off"><span data-lang="en">Join Waitlist →</span><span data-lang="zh">加入等待名单 →</span></span>
+    </article>
+  </div>
+
+  <div class="more-note rv" style="margin-top:12px;">
     <span data-lang="en">More products in development — <em>ZeroAI is just getting started</em></span>
     <span data-lang="zh">更多产品正在开发中 — <em>ZeroAI 才刚开始</em></span>
   </div>
