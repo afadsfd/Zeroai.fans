@@ -309,11 +309,12 @@ section + section { border-top: 1px solid var(--bd); }
   background: linear-gradient(90deg, transparent 10%, var(--a) 50%, transparent 90%);
   opacity: 0; transition: opacity .3s;
 }
-.pcard:hover { border-color: var(--bd2); background: var(--s2); }
-.pcard:hover::before { opacity: 0.6; }
-.pcard.featured { border-color: var(--a-border); background: rgba(0,200,150,0.03); }
-.pcard.featured::before { opacity: 0.4; }
-.pcard.featured:hover { background: rgba(0,200,150,0.05); }
+.pcard:hover {
+  border-color: var(--a-border);
+  background: rgba(0,200,150,0.04);
+  box-shadow: 0 0 0 1px var(--a-border), 0 8px 48px rgba(0,200,150,0.08);
+}
+.pcard:hover::before { opacity: 0.7; }
 
 /* Compact soon card */
 .pcard-soon {
@@ -587,7 +588,7 @@ footer {
   <!-- Live products: large 2-col -->
   <div class="prod-live">
     <!-- MeetSimul -->
-    <article class="pcard featured rv" itemscope itemtype="https://schema.org/SoftwareApplication">
+    <article class="pcard rv" itemscope itemtype="https://schema.org/SoftwareApplication">
       <span class="pstatus ps-live"><span data-lang="en">LIVE</span><span data-lang="zh">已上线</span></span>
       <div class="picon">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
